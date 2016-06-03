@@ -1,16 +1,14 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
+  "name": "F2E-FinalProject",
   "version": "1.0.1",
-  "description": "Gmin's game server",
+  "description": "F2E-FinalProject",
   "private": true,
   "main": "server.js",
   "dependencies" : {
     "express" : "latest",
     "mongoose" : "latest",
     "passport" : "latest",
-    "passport-local" : "latest",
     "passport-facebook" : "latest",
-    "bcrypt-nodejs": "latest",
     "morgan": "latest",
     "body-parser": "latest",
     "cookie-parser": "latest",

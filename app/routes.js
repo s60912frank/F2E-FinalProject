@@ -6,7 +6,6 @@ module.exports = function(app, passport) {
   });
 
   app.get('/discuss', isLoggedIn, function(req, res){
-    //var dataFound;
     //可能會有點問題?
     Topic.find({},function(err, data){
       if(err) throw err;
@@ -18,8 +17,6 @@ module.exports = function(app, passport) {
         });
       }
     });
-
-    //console.log("DATA FOUND!" + dataFound);
   });
 
   //增加主題
@@ -36,6 +33,9 @@ module.exports = function(app, passport) {
           console.log(newTopic.name + " created!");
         });
       }
+      else{
+        console.log("話題重複!");
+      }
       res.redirect('./discuss');
     });
   });
@@ -46,19 +46,75 @@ module.exports = function(app, passport) {
       if(err) throw err;
       if(topic){
         topic.comments.push({
-          who: req.user.facebook.name,
+          who: req.user.name,
           comment: req.body.comment,
           time: new Date()
         });
         //console.log("成功回應!");
         topic.save(function(err) {
           if (err) throw err;
-          console.log(topic.comment + " added!");
+          console.log(req.body.comment + " added!");
         });
       }
-      res.redirect('./discuss');
+      //res.redirect('./discuss');
     });
   });
+
+  //-----------ADMIN AREA---------------
+  app.get('/admin', isLoggedIn, function(req, res){
+    if(req.user.isAdmin){
+      Topic.find({}, function(err, data){
+        if(err) throw err;
+        if(data){
+          //可能會有問題???
+          res.render('admin.ejs', {
+            user: req.user,
+            topics: data
+          });
+        }
+      });
+    }
+    else{
+      res.redirect('/discuss');
+    }
+  });
+
+  app.post('/deleteTopic', isLoggedIn, function(req, res){
+    if(req.user.isAdmin){
+      Topic.remove({ name: req.body.topic }, function(err){
+        if(err) throw err;
+        console.log("Topic " + req.body.topic + " removed!");
+      });
+    }
+    else{
+      res.redirect('/discuss');
+    }
+  });
+
+  app.post('/deleteComment', isLoggedIn, function(req, res){
+    if(req.user.isAdmin){
+      Topic.findOne({ name: req.body.topic }, function(err, topic){
+        if(err) throw err;
+        if(topic){
+          //笨方法
+          for(var i = 0;i < topic.comments.length; i++){
+            if(topic.comments[i].who == req.body.who && topic.comments[i].comment == req.body.comment){
+              topic.comments.splice(i, 1);
+            }
+          }
+          //改完存回去
+          topic.save(function(err) {
+            if (err) throw err;
+            console.log("Comment " + req.body.comment + " removed!");
+          });
+        }
+      });
+    }
+    else{
+      res.redirect('/discuss');
+    }
+  });
+  //-----------ADMIN AREA---------------
 
   //登入
   app.post('/login', passport.authenticate('local-login'), function(req, res) {

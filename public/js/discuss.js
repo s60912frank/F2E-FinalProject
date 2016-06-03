@@ -12,8 +12,8 @@ $(document).ready(function(){
       comment: $(this).siblings('.commentText').val()
     }, function(){
       //alert("Comment added successfully");
-      location.reload();
     });
+    location.reload();
   });
 
   $('#logout').click(function(){
