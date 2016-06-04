@@ -60,6 +60,7 @@ module.exports = function(passport) {
             newUser.facebookId = profile.id; // set the users facebook id
             newUser.token = token; // we will save the token that facebook provides to the user
             newUser.name = profile.displayName; // look at the passport user profile to see how names are returned
+            newUser.nickname = profile.displayName;
             newUser.isAdmin = false;
             // save our user to the database
             newUser.save(function(err) {

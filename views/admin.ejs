@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+</head>
+<body>
+  <h1>哈囉!管理員<%= user.name %></h1>
+  <a href="/discuss"><button>回到討論</button></a>
+
+  <% if (topics) { %>
+    <% for(var i = topics.length - 1; i >= 0; i--) {%>
+     <div>
+       <h2 class="topicTitle"><%= topics[i].name %></h2>
+       <button class="deleteTopic">刪除主題</button>
+       <ul>
+         <% for(var j = topics[i].comments.length - 1; j >= 0; j--) {%>
+           <% var date = topics[i].comments[j].time %>
+           <li class="comment">
+             <span class="commentById" style="display:none"><%= topics[i].comments[j].uid %></span>
+             <span class="commentBy"><%= topics[i].comments[j].name %></span>:
+             <span class="commentContent"><%= topics[i].comments[j].comment %></span>@
+             <%= date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() +
+             ' ' + date.getHours() + ":" + date.getMinutes() %>
+             <button class="deleteComment">刪除留言</button>
+           </li>
+         <% } %>
+       </ul>
+     </div>
+    <% } %>
+  <% } %>
+
+  <script src="./js/jquery-2.2.4.min.js"></script>
+  <script src="./js/admin.js"></script>
+</body>
+</html>

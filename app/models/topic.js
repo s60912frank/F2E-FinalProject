@@ -5,8 +5,9 @@ var mongoose = require('mongoose');
 var topicSchema = mongoose.Schema({
   name: String,
   time: Date,
+  startedBy: String, //uid
   comments: [{
-    who: String,
+    uid: String,
     comment: String,
     time: Date
   }]

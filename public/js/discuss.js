@@ -6,6 +6,13 @@ $(document).ready(function(){
     });
   });
 
+  $('#changeNickname').click(function(){
+    $.post('/changeNickname', { nickname: $('#nicknameText').val() }, function(){
+      //alert("Topic added successfully");
+      location.reload();
+    });
+  });
+
   $('.sendComment').click(function(){
     $.post('/comment', {
       topic: $(this).siblings('.topicTitle').text(),

@@ -5,15 +5,54 @@ module.exports = function(app, passport) {
     res.render('index.ejs');
   });
 
+  //這是一個雙層迴圈的遞迴版 為了解決非同步問題zzz
+  var idToNickname = function(data, i, j, done){
+    //i是主題數的變數 j是第i主題留言數的變數
+    if(data.length > i && data[i].comments.length > j){
+      User.findOne({ _id: data[i].comments[j].uid }, function(err, user){
+        if(err) throw err;
+        if(user){
+          data[i].comments[j].uid;
+          data[i].comments[j].name = user.nickname;
+          //往下一則留言前進
+          idToNickname(data, i, j + 1, done);
+        }
+      });
+    }
+    else if(data.length > i && data[i].comments.length == j){
+      //往下個主題前進
+      idToNickname(data, i + 1, 0, done);
+    }
+    else{
+      //結束後call這個把網頁給使用者
+      done();
+    }
+  };
+
   app.get('/discuss', isLoggedIn, function(req, res){
     //可能會有點問題?
-    Topic.find({},function(err, data){
+    Topic.find({}, function(err, data){
       if(err) throw err;
       if(data){
-        //this.dataFound = data;
-        res.render('discuss.ejs', {
-          user: req.user,
-          topics: data
+        idToNickname(data, 0, 0, function(){
+          res.render('discuss.ejs', {
+            user: req.user,
+            topics: data
+          });
+        });
+      }
+    });
+  });
+
+  //更改暱稱
+  app.post('/changeNickname', isLoggedIn, function(req, res){
+    User.findOne({ _id: req.user._id }, function(err, user){
+      if(err) throw err;
+      if(user){
+        user.nickname = req.body.nickname;
+        user.save(function(err){
+          if (err) throw err;
+          console.log(user.name + " > " + user.nickname);
         });
       }
     });
@@ -28,6 +67,7 @@ module.exports = function(app, passport) {
         newTopic.name = req.body.name;
         newTopic.time = new Date();
         newTopic.comments = undefined;
+        newTopic.startedBy = req.user._id;
         newTopic.save(function(err) {
           if (err) throw err;
           console.log(newTopic.name + " created!");
@@ -46,7 +86,7 @@ module.exports = function(app, passport) {
       if(err) throw err;
       if(topic){
         topic.comments.push({
-          who: req.user.name,
+          uid: req.user._id,
           comment: req.body.comment,
           time: new Date()
         });
@@ -66,10 +106,11 @@ module.exports = function(app, passport) {
       Topic.find({}, function(err, data){
         if(err) throw err;
         if(data){
-          //可能會有問題???
-          res.render('admin.ejs', {
-            user: req.user,
-            topics: data
+          idToNickname(data, 0, 0, function(){
+            res.render('admin.ejs', {
+              user: req.user,
+              topics: data
+            });
           });
         }
       });
@@ -98,7 +139,7 @@ module.exports = function(app, passport) {
         if(topic){
           //笨方法
           for(var i = 0;i < topic.comments.length; i++){
-            if(topic.comments[i].who == req.body.who && topic.comments[i].comment == req.body.comment){
+            if(topic.comments[i].uid == req.body.uid && topic.comments[i].comment == req.body.comment){
               topic.comments.splice(i, 1);
             }
           }

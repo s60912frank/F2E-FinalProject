@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
   facebookId: String,
   token: String,
   name: String,
+  nickname: String,
   isAdmin: Boolean
 });
 
