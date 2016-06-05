@@ -9,6 +9,9 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var passportSocketIo = require("passport.socketio");
+//var io = require("socket.io")(server),
 
 var configDB = require('./config/database.js'); //db位置
 
@@ -29,11 +32,23 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 // required for passport
 app.use(session({
     secret: 'gminissosmart', //???
-    resave: true,
-    saveUninitialized: false
-})); // session secret
+    saveUninitialized: false, // don't create session until something stored
+    resave: false, //don't save session if unmodified
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
+
+/*//socket.io and passport authenticate
+io.use(passportSocketIo.authorize({
+  cookieParser: cookieParser,       // the same middleware you registrer in express
+  key:          'express.sid',       // the name of the cookie where express/connect stores its session_id
+  secret:       'gminissosmart',    // the session_secret to parse the cookie
+  store:        MongoStore,        // we NEED to use a sessionstore. no memorystore please
+  success:      onAuthorizeSuccess,  // *optional* callback on success - read more below
+  fail:         onAuthorizeFail,     // *optional* callback on fail/error - read more below
+}));*/
+
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
