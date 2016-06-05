@@ -1,6 +1,6 @@
 var User = require('./models/user'); //資料庫USER的shema
 var Topic = require('./models/topic'); //資料庫TOPIC的shema
-module.exports = function(app, passport) {
+module.exports = function(app, passport, ioop) {
   app.get('/', function(req, res){
     res.render('index.ejs');
   });

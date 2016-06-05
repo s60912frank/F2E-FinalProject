@@ -1,22 +1,23 @@
-var express  = require('express');
-var app      = express();
+var express = require('express');
+var app = express();
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-var morgan       = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var mongoStore = require('connect-mongo')(session);
 var passportSocketIo = require("passport.socketio");
-//var io = require("socket.io")(server),
+var io = require("socket.io")(app.server);
 
 var configDB = require('./config/database.js'); //db位置
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
+var msInstance = new mongoStore({ mongooseConnection: mongoose.connection }); //save session in mongo
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -34,26 +35,28 @@ app.use(session({
     secret: 'gminissosmart', //???
     saveUninitialized: false, // don't create session until something stored
     resave: false, //don't save session if unmodified
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: msInstance
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-/*//socket.io and passport authenticate
+//socket.io and passport authenticate
 io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,       // the same middleware you registrer in express
-  key:          'express.sid',       // the name of the cookie where express/connect stores its session_id
-  secret:       'gminissosmart',    // the session_secret to parse the cookie
-  store:        MongoStore,        // we NEED to use a sessionstore. no memorystore please
-  success:      onAuthorizeSuccess,  // *optional* callback on success - read more below
-  fail:         onAuthorizeFail,     // *optional* callback on fail/error - read more below
-}));*/
+  key: 'connect.sid',       // the name of the cookie where express/connect stores its session_id
+  secret: 'gminissosmart',    // the session_secret to parse the cookie
+  store: msInstance,        // we NEED to use a sessionstore. no memorystore please
+  success: function (data, accept){ accept() },  // *optional* callback on success - read more below
+  fail: function (data, message, error, accept){ accept() }     // *optional* callback on fail/error - read more below
+}));
 
+//socket.io operations
+var ioop = require('./app/realtime.js')(io);
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, ioop); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port, ip_address, function(){
+io.listen(app.listen(port, ip_address, function(){
   console.log('The magic happens on port ' + port);
-});
+}));
