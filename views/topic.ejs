@@ -6,15 +6,20 @@
 </head>
 <body>
   <h1>議題</h1>
-  <h1>嗨! <span id="userName"><%= user.name %></span>! 準備好嘴砲了嗎?</h1>
-  <p>你現在的身分是:<%= user.nickname %></p>
-  <input type="text" id="nicknameText">
-  <button id="changeNickname">更改暱稱</button>
 
-  <button id="logout">登出</button>
-  <!--只有是管理者才會出現這個按鈕-->
-  <%if (user.isAdmin) { %>
-    <a href="/admin"><button>後臺管理</button></a>
+  <%if (isAuthenticated) { %>
+    <h1>嗨! <span id="userName"><%= user.name %></span>! 準備好嘴砲了嗎?</h1>
+    <p>你現在的身分是:<%= user.nickname %></p>
+    <%if (user.isAdmin) { %>
+      <!--只有是管理者才會出現這個按鈕-->
+      <a href="/admin"><button>後臺管理</button></a>
+    <% } %>
+    <input type="text" id="nicknameText">
+    <button id="changeNickname">更改暱稱</button>
+    <button id="logout">登出</button>
+    <p>你已經登入!!</p>
+  <% }else{ %>
+    <p>你沒有登入!!</p>
   <% } %>
 
   <a href="/topicList">回到列表</a>
@@ -50,8 +55,12 @@
       </li>
     <% } %>
   </ul>
-  <input type="text" class="commentText">
-  <button class="sendComment">回應</button>
+
+  <!-- 登入後才可回應 -->
+  <%if (isAuthenticated) { %>
+    <input type="text" class="commentText">
+    <button class="sendComment">回應</button>
+  <% } %>
 
   <script src="./js/jquery-2.2.4.min.js"></script>
   <script src="./js/topic.js"></script>

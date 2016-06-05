@@ -5,41 +5,36 @@ module.exports = function(app, passport) {
     res.render('index.ejs');
   });
 
-  app.get('/topicList', isLoggedIn, function(req, res){
+  app.get('/topicList', function(req, res){
     Topic.find({}, function(err, data){
       if(err) throw err;
       if(data){
         res.render('topicList.ejs', {
           user: req.user,
-          topics: data
+          topics: data,
+          isAuthenticated: req.isAuthenticated()
         });
       }
     });
   });
 
-  app.get('/hot', isLoggedIn, function(req, res){
+  app.get('/hot', function(req, res){
     Topic.find({}).sort('-commentsCount').limit(3).exec(function(err, data){
       if(err) throw err;
       if(data){
-        res.render('hot.ejs', {
-          user: req.user,
-          topics: data
-        });
+        res.render('hot.ejs', { topics: data });
       }
     });
   });
 
-  app.get('/search', isLoggedIn, function(req, res){
+  app.get('/search', function(req, res){
     Topic.find({ name: { "$regex": req.query.text, "$options": "i" } }).exec(function(err, data){
       if(err) throw err;
       var searchResult = {
         text: req.query.text,
         result: data
       };
-      res.render('search.ejs', {
-        user: req.user,
-        search: searchResult
-      });
+      res.render('search.ejs', { search: searchResult });
     });
   });
 
@@ -62,14 +57,15 @@ module.exports = function(app, passport) {
     }
   };
 
-  app.get('/topic', isLoggedIn, function(req, res){
+  app.get('/topic', function(req, res){
     Topic.findOne({ name: req.query.title }, function(err, topic){
       if(err) throw err;
       if(topic){
         idToNickname(topic, 0, function(){
           res.render('topic.ejs', {
             user: req.user,
-            topic: topic
+            topic: topic,
+            isAuthenticated: req.isAuthenticated()
           });
         });
       }
@@ -193,22 +189,6 @@ module.exports = function(app, passport) {
   });
   //-----------ADMIN AREA---------------
 
-  //登入
-  app.post('/login', passport.authenticate('local-login'), function(req, res) {
-    if (req.user) {
-      res.send(req.user); //登入成功
-    } else {
-      res.send("Account not found"); //你誰
-    }
-  });
-  //註冊
-  app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-    if (req.user) {
-      res.send(req.user); //註冊成功
-    } else {
-      res.send("Account already exists"); //你已經註冊過了!
-    }
-  });
   app.get('/auth/facebook', passport.authenticate('facebook', {
     scope: 'email'
   }));
