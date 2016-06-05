@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>議題</title>
+</head>
+<body>
+  <h1>議題</h1>
+  <h1>嗨! <span id="userName"><%= user.name %></span>! 準備好嘴砲了嗎?</h1>
+  <p>你現在的身分是:<%= user.nickname %></p>
+  <input type="text" id="nicknameText">
+  <button id="changeNickname">更改暱稱</button>
+
+  <button id="logout">登出</button>
+  <!--只有是管理者才會出現這個按鈕-->
+  <%if (user.isAdmin) { %>
+    <a href="/admin"><button>後臺管理</button></a>
+  <% } %>
+
+  <a href="/topicList">回到列表</a>
+
+  <h2 id="topicTitle"><%= topic.name %></h2>
+
+  <ul>
+    <% for(var i = topic.comments.length - 1; i >= 0; i--) { %>
+      <li>
+        <% var date = topic.comments[i].time
+           if(topic.comments[i].comment.indexOf(".jpg") != -1 ||
+              topic.comments[i].comment.indexOf(".png") != -1 ||
+              topic.comments[i].comment.indexOf(".gif") != -1) { %>
+             <%= topic.comments[i].name + ':' %>
+             <a href=<%= topic.comments[i].comment %>>
+               <img src=<%= topic.comments[i].comment %> alt="" style="max-width: 400px">
+             </a>
+             <%= '@' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+                 date.getHours() + ":" + date.getMinutes() %>
+        <% } else if(topic.comments[i].comment.indexOf("www.youtube.com") != -1){
+          var text = topic.comments[i].comment
+          var vid = text.substring(text.indexOf("?v=") + 3, text.length);
+          var embedUrl = "https://www.youtube.com/embed/" + vid + "?rel=0" %>
+          <%= topic.comments[i].name + ':' %>
+          <iframe width="560" height="315" src=<%= embedUrl %> frameborder="0" allowfullscreen></iframe>
+          <%= '@' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+              date.getHours() + ":" + date.getMinutes() %>
+        <% } else{ %>
+          <%= topic.comments[i].name + ':' + topic.comments[i].comment + '@' +
+              date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+              date.getHours() + ":" + date.getMinutes() %>
+        <% } %>
+      </li>
+    <% } %>
+  </ul>
+  <input type="text" class="commentText">
+  <button class="sendComment">回應</button>
+
+  <script src="./js/jquery-2.2.4.min.js"></script>
+  <script src="./js/topic.js"></script>
+</body>
+</html>

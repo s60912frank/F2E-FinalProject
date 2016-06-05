@@ -1,11 +1,4 @@
 $(document).ready(function(){
-  $('#addTopic').click(function(){
-    $.post('/addTopic', { name: $('#topicText').val() }, function(){
-      //alert("Topic added successfully");
-      location.reload();
-    });
-  });
-
   $('#changeNickname').click(function(){
     $.post('/changeNickname', { nickname: $('#nicknameText').val() }, function(){
       //alert("Topic added successfully");
@@ -15,7 +8,7 @@ $(document).ready(function(){
 
   $('.sendComment').click(function(){
     $.post('/comment', {
-      topic: $(this).siblings('.topicTitle').text(),
+      topic: $('#topicTitle').text(),
       comment: $(this).siblings('.commentText').val()
     }, function(){
       //alert("Comment added successfully");

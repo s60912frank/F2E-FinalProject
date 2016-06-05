@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>熱門議題</title>
+</head>
+<body>
+  <h1>前三大熱門主題</h1>
+  <% if(topics){
+     for(var i = 0; i < topics.length; i++) {
+      var link = "/topic?title=" + topics[i].name; %>
+      <li>
+        <a href=<%= link %>><%= topics[i].name %></a>
+        共<%= topics[i].commentsCount %>則留言
+      </li>
+    <% } %>
+  <% } %>
+</body>
+</html>

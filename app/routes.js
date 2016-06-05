@@ -5,23 +5,56 @@ module.exports = function(app, passport) {
     res.render('index.ejs');
   });
 
-  //這是一個雙層迴圈的遞迴版 為了解決非同步問題zzz
-  var idToNickname = function(data, i, j, done){
-    //i是主題數的變數 j是第i主題留言數的變數
-    if(data.length > i && data[i].comments.length > j){
-      User.findOne({ _id: data[i].comments[j].uid }, function(err, user){
+  app.get('/topicList', isLoggedIn, function(req, res){
+    Topic.find({}, function(err, data){
+      if(err) throw err;
+      if(data){
+        res.render('topicList.ejs', {
+          user: req.user,
+          topics: data
+        });
+      }
+    });
+  });
+
+  app.get('/hot', isLoggedIn, function(req, res){
+    Topic.find({}).sort('-commentsCount').limit(3).exec(function(err, data){
+      if(err) throw err;
+      if(data){
+        res.render('hot.ejs', {
+          user: req.user,
+          topics: data
+        });
+      }
+    });
+  });
+
+  app.get('/search', isLoggedIn, function(req, res){
+    Topic.find({ name: { "$regex": req.query.text, "$options": "i" } }).exec(function(err, data){
+      if(err) throw err;
+      var searchResult = {
+        text: req.query.text,
+        result: data
+      };
+      res.render('search.ejs', {
+        user: req.user,
+        search: searchResult
+      });
+    });
+  });
+
+  //遞迴 為了解決非同步問題zzz
+  var idToNickname = function(topic, i, done){
+    //i是主題留言數的變數
+    if(topic.comments.length > i){
+      User.findOne({ _id: topic.comments[i].uid }, function(err, user){
         if(err) throw err;
         if(user){
-          data[i].comments[j].uid;
-          data[i].comments[j].name = user.nickname;
+          topic.comments[i].name = user.nickname;
           //往下一則留言前進
-          idToNickname(data, i, j + 1, done);
+          idToNickname(topic, i + 1, done);
         }
       });
-    }
-    else if(data.length > i && data[i].comments.length == j){
-      //往下個主題前進
-      idToNickname(data, i + 1, 0, done);
     }
     else{
       //結束後call這個把網頁給使用者
@@ -29,17 +62,19 @@ module.exports = function(app, passport) {
     }
   };
 
-  app.get('/discuss', isLoggedIn, function(req, res){
-    //可能會有點問題?
-    Topic.find({}, function(err, data){
+  app.get('/topic', isLoggedIn, function(req, res){
+    Topic.findOne({ name: req.query.title }, function(err, topic){
       if(err) throw err;
-      if(data){
-        idToNickname(data, 0, 0, function(){
-          res.render('discuss.ejs', {
+      if(topic){
+        idToNickname(topic, 0, function(){
+          res.render('topic.ejs', {
             user: req.user,
-            topics: data
+            topic: topic
           });
         });
+      }
+      else{
+        res.redirect('/404');
       }
     });
   });
@@ -67,6 +102,7 @@ module.exports = function(app, passport) {
         newTopic.name = req.body.name;
         newTopic.time = new Date();
         newTopic.comments = undefined;
+        newTopic.commentsCount = 0;
         newTopic.startedBy = req.user._id;
         newTopic.save(function(err) {
           if (err) throw err;
@@ -76,7 +112,7 @@ module.exports = function(app, passport) {
       else{
         console.log("話題重複!");
       }
-      res.redirect('./discuss');
+      res.redirect('/topicList');
     });
   });
 
@@ -90,6 +126,7 @@ module.exports = function(app, passport) {
           comment: req.body.comment,
           time: new Date()
         });
+        topic.commentsCount = topic.commentsCount + 1;
         //console.log("成功回應!");
         topic.save(function(err) {
           if (err) throw err;
@@ -106,11 +143,9 @@ module.exports = function(app, passport) {
       Topic.find({}, function(err, data){
         if(err) throw err;
         if(data){
-          idToNickname(data, 0, 0, function(){
-            res.render('admin.ejs', {
-              user: req.user,
-              topics: data
-            });
+          res.render('admin.ejs', {
+            user: req.user,
+            topics: data
           });
         }
       });
@@ -141,6 +176,7 @@ module.exports = function(app, passport) {
           for(var i = 0;i < topic.comments.length; i++){
             if(topic.comments[i].uid == req.body.uid && topic.comments[i].comment == req.body.comment){
               topic.comments.splice(i, 1);
+              topic.commentsCount = topic.commentsCount - 1;
             }
           }
           //改完存回去
@@ -180,7 +216,7 @@ module.exports = function(app, passport) {
   // handle the callback after facebook has authenticated the user
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/discuss',
+      successRedirect: '/topicList',
       failureRedirect: '/'
     }));
 
@@ -188,6 +224,14 @@ module.exports = function(app, passport) {
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+  });
+
+  app.get('/404', function(req, res) {
+    res.render('404.ejs');
+  });
+
+  app.get('*', function(req, res) {
+    res.redirect('/404');
   });
 };
 

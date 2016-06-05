@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>搜尋結果</title>
+</head>
+<body>
+  <h1><%= search.text %>的搜尋結果</h1>
+  <a href="/topicList"><<返回列表</a>
+  <% if(search){
+     for(var i = 0; i < search.result.length; i++) {
+      var link = "/topic?title=" + search.result[i].name; %>
+      <li>
+        <a href=<%= link %>><%= search.result[i].name %></a>
+      </li>
+    <% } %>
+  <% } %>
+</body>
+</html>

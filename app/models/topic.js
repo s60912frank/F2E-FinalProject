@@ -10,7 +10,8 @@ var topicSchema = mongoose.Schema({
     uid: String,
     comment: String,
     time: Date
-  }]
+  }],
+  commentsCount: Number
 });
 
 // create the model for users and expose it to our app
