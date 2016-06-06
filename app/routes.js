@@ -84,6 +84,7 @@ module.exports = function(app, passport, ioop) {
         user.save(function(err){
           if (err) throw err;
           console.log(user.name + " > " + user.nickname);
+          res.end();
         });
       }
     });
@@ -109,6 +110,7 @@ module.exports = function(app, passport, ioop) {
         console.log("話題重複!");
       }
       res.redirect('/topicList');
+      res.end();
     });
   });
 
@@ -130,6 +132,7 @@ module.exports = function(app, passport, ioop) {
         });
       }
       //res.redirect('./discuss');
+      res.end();
     });
   });
 
@@ -156,6 +159,7 @@ module.exports = function(app, passport, ioop) {
       Topic.remove({ name: req.body.topic }, function(err){
         if(err) throw err;
         console.log("Topic " + req.body.topic + " removed!");
+        res.end();
       });
     }
     else{
@@ -181,6 +185,7 @@ module.exports = function(app, passport, ioop) {
             console.log("Comment " + req.body.comment + " removed!");
           });
         }
+        res.end();
       });
     }
     else{
