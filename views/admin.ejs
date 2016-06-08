@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>哈囉!管理員<%= user.name %></h1>
-  <a href="/discuss"><button>回到討論</button></a>
+  <a href="/topicList"><button>回到討論</button></a>
 
   <% if (topics) { %>
     <% for(var i = topics.length - 1; i >= 0; i--) {%>
@@ -19,7 +19,7 @@
            <li class="comment">
              <span class="commentById"><%= topics[i].comments[j].uid %></span>:
              <span class="commentContent"><%= topics[i].comments[j].comment %></span>@
-             <%= date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() +
+             <%= (date.getMonth() + 1) + '/' + date.getDate() +
              ' ' + date.getHours() + ":" + date.getMinutes() %>
              <button class="deleteComment">刪除留言</button>
            </li>

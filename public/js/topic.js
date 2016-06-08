@@ -4,7 +4,7 @@ $(document).ready(function(){
   socket.on('comment', function(data){
     var component = '<span class="commentBy">' + data.name + '</span>';
     var time = new Date(data.time);
-    var timeString = time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
+    var timeString = (time.getMonth() + 1) + '/' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
     if(data.comment.indexOf(".jpg") != -1 || data.comment.indexOf(".jpeg") != -1 || data.comment.indexOf(".png") != -1 || data.comment.indexOf(".gif") != -1) {
       component += ':' + '<a href=' + data.comment + '><img src=' + data.comment + ' style="max-width: 400px"></a>@' + timeString;
     }
@@ -35,25 +35,48 @@ $(document).ready(function(){
       to: $('#nicknameText').val()
     });
     $('#nickname').text($('#nicknameText').val());
-    $.post('/changeNickname', { nickname: $('#nicknameText').val() }, function(){
-      //alert("Topic added successfully");
-      location.reload();
-    });
+    $.post('/changeNickname', { nickname: $('#nicknameText').val() });
+    $('#nicknameText').val("");
+  });
+
+  $('#nicknameText').keypress(function(e){
+    if(e.which == 13){
+      socket.emit('nickNameChanged', {
+        from: $('#nickname').text(),
+        to: $(this).val()
+      });
+      $('#nickname').text($(this).val());
+      $.post('/changeNickname', { nickname: $(this).val() });
+      $(this).val("");
+      return false;
+    }
   });
 
   $('.sendComment').click(function(){
     socket.emit('comment', {
       name: $('#nickname').text(),
-      comment: $(this).siblings('.commentText').val(),
-      time: new Date()
+      comment: $(this).siblings('.commentText').val()
     });
     $.post('/comment', {
       topic: $('#topicTitle').text(),
       comment: $(this).siblings('.commentText').val()
-    }, function(){
-      //alert("Comment added successfully");
     });
-    //location.reload();
+    comment: $(this).siblings('.commentText').val("");
+  });
+
+  $('.commentText').keypress(function(e){
+    if(e.which == 13){
+      socket.emit('comment', {
+        name: $('#nickname').text(),
+        comment: $(this).val()
+      });
+      $.post('/comment', {
+        topic: $('#topicTitle').text(),
+        comment: $(this).val()
+      });
+      comment: $(this).val("");
+      return false;
+    }
   });
 
   $('#logout').click(function(){

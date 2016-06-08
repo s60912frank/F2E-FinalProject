@@ -36,7 +36,7 @@
       <li>
         <span class="commentBy"><%= topic.comments[i].name %></span>:
         <% var date = topic.comments[i].time;
-           var timeString = '@' + date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes();
+           var timeString = '@' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes();
            if(topic.comments[i].comment.indexOf(".jpg") != -1 ||
               topic.comments[i].comment.indexOf(".jpeg") != -1 ||
               topic.comments[i].comment.indexOf(".png") != -1 ||

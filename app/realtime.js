@@ -14,6 +14,7 @@ module.exports = function(io){
 
     socket.on('comment', function(data){
       if(socket.request.user.logged_in){
+        data['time'] = new Date();
         io.sockets.in(socket.topic).emit('comment', data);
       }
     });

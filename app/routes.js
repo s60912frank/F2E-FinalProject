@@ -124,7 +124,7 @@ module.exports = function(app, passport, ioop) {
           comment: req.body.comment,
           time: new Date()
         });
-        topic.commentsCount = topic.commentsCount + 1;
+        topic.commentsCount = topic.comments.length;
         //console.log("成功回應!");
         topic.save(function(err) {
           if (err) throw err;
@@ -176,9 +176,9 @@ module.exports = function(app, passport, ioop) {
           for(var i = 0;i < topic.comments.length; i++){
             if(topic.comments[i].uid == req.body.uid && topic.comments[i].comment == req.body.comment){
               topic.comments.splice(i, 1);
-              topic.commentsCount = topic.commentsCount - 1;
             }
           }
+          topic.commentsCount = topic.comments.length
           //改完存回去
           topic.save(function(err) {
             if (err) throw err;
