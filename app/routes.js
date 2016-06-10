@@ -27,6 +27,22 @@ module.exports = function(app, passport, ioop) {
     });
   });
 
+  app.get('/hotTopics', function(req, res){
+    Topic.find({}).limit(10).exec(function(err, data){
+      if(err) throw err;
+      if(data){
+        var dataToSend = [];
+        data.forEach(function(d){
+          dataToSend.push({
+            title: d.name,
+            value: d.commentsCount
+          });
+        });
+        res.json(dataToSend);
+      }
+    });
+  });
+
   app.get('/search', function(req, res){
     Topic.find({ name: { "$regex": req.query.text, "$options": "i" } }).exec(function(err, data){
       if(err) throw err;
