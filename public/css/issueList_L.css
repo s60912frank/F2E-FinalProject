@@ -1,0 +1,58 @@
+@media screen and (min-width:1280px){
+
+.header{
+  width: 1280px;
+
+}
+
+.logo{
+   margin-left: 3.75%;
+   display: inline-block;
+   float: left;
+ }
+
+.hamburger{
+  margin-top: 83px;
+  margin-right: 3.75%;
+  display: inline-block;
+  float: right;
+}
+
+.content{
+  margin: 0;
+  width: 1280px;
+  display: inline-block;
+}
+
+.issue_list{
+  margin-top: 55px;
+  width: 44.765%;
+  margin-left:27.1875%;
+  margin-right: 28%;
+  display: inline-block;
+  float: right;
+}
+
+.hot_issue{
+  margin-left: 3.90625%;
+  margin-top: 50px;
+  width: 44.6875%;
+  display: inline-block;
+  float: left;
+}
+
+.latest_issue{
+  margin-left: 2.8125%;
+  margin-top: 50px;
+  width: 44.6875%;
+  display: inline-block;
+  float: left;
+}
+
+.all_issue{
+  margin-top: 57px;
+  margin-left: 3.90625%;
+  width: 92.34375%;
+}
+
+}
