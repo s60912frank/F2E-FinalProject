@@ -35,6 +35,7 @@ module.exports = function(app, passport, ioop) {
         data.forEach(function(d){
           dataToSend.push({
             title: d.name,
+            link: "/topic?title=" + d.name,
             value: d.commentsCount
           });
         });

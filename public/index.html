@@ -19,8 +19,12 @@
     <div class="container">
       <div id="slogan">SLOGAN</div>
       <div id="buttons">
-        <div class="button">LOGIN</div>
-        <div class="button">議題列表</div>
+        <a href="/auth/facebook">
+          <div class="button">LOGIN</div>
+        </a>
+        <a href="/topicList">
+          <div class="button">議題列表</div>
+        </a>
       </div>
     </div>
   </div>
@@ -28,7 +32,7 @@
   <div class="fillParentWidth" id="hot">
     <div class="container">
       <h1 id="hotTitle">熱門議題</h1>
-      <svg></svg>
+      <svg class="fillParentWidth"></svg>
     </div>
   </div>
 
@@ -37,6 +41,7 @@
   </footer>
 
   <script src="./js/jquery-3.0.0.min.js"></script>
+  <script src="./js/d3.min.js"></script>
   <script src="./js/index.js"></script>
 </body>
 </html>
