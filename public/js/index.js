@@ -1,26 +1,58 @@
+var isInputOpen = false;
 $(document).ready(
   function(){
+    shrinkNavBar($(window).scrollTop());
     $(window).scroll(function (event){
       var pos = $(window).scrollTop();
+      /*console.log(pos);
+      if(pos > 200){
+        shrinkNavBar();
+      }*/
       if(pos <= 400){
-        var color = 'rgba(255, 255, 255,' + pos / 500 + ')';
-        $('#navbar').css('background-color', color);
-        $('#navbar').css('height', 50 * ((400 - pos) / 400) + 50);
-        $('.dynMarginTop').css('margin-top', 13 * (400 - pos) / 400 + 12);
+        shrinkNavBar(pos);
       }
     });
 
     $('#searchIcon').click(function(){
-      var searchText = $('#searchInput').val();
-      if(searchText != ""){
-        window.location = '/search?text=' + $('#searchInput').val();
+      if($(window).width() < 768 && !isInputOpen){
+        $('#searchInput').css('margin-right', -$('#searchInput').width());
+        $('#searchInput').show();
+        $('#logo').animate({ 'margin-left': -$('#logo').width() }, 200);
+        $('#searchInput').animate({ 'margin-right': '0px' }, 200);
+        isInputOpen = true;
       }
-      else{
-        //do something
+      else if(isInputOpen){
+        var searchText = $('#searchInput').val();
+        if(searchText != ""){
+          window.location = '/search?text=' + $('#searchInput').val();
+        }
+        else{
+          //do something
+        }
+      }
+    });
+
+    $('#searchInput').focusout(function(){
+      if(isInputOpen){
+        $('#logo').animate({ 'margin-left': 0 }, 200);
+        $('#searchInput').animate({ 'margin-right': -$('#searchInput').width() }, 200, function(){
+          $('#searchInput').val("");
+          $(this).hide();
+        });
+        isInputOpen = false;
       }
     });
   }
 );
+
+/*var shrinkNavBar = function(){
+  $('#navbar').animate({
+    backgroundColor: 'rgba(0,255,0,0.4)',
+    height: 50,
+    opacity: 0
+  }, 300);
+  $('.dynMarginTop').animate({ "margin-top": 12.5 }, 300);
+}*/
 
 d3.json('/hotTopics', function(err, data){
   if(!err && data){
@@ -61,4 +93,12 @@ var DrawHotTopic = function(data){
       y: function(it) { return it.y + 12; },
       "text-anchor": "middle",
     }).text(function(it) { return it.value; });
+}
+
+var shrinkNavBar = function(pos){
+  if(pos > 400) pos = 400;
+  var color = 'rgba(255, 255, 255,' + pos / 500 + ')';
+  $('#navbar').css('background-color', color);
+  $('#navbar').css('height', 50 * ((400 - pos) / 400) + 50);
+  $('.dynMarginTop').css('margin-top', 13 * (400 - pos) / 400 + 12);
 }
