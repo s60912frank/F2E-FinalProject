@@ -28,7 +28,7 @@ module.exports = function(app, passport, ioop) {
   });
 
   app.get('/hotTopics', function(req, res){
-    Topic.find({}).limit(10).exec(function(err, data){
+    Topic.find({}).limit(20).exec(function(err, data){
       if(err) throw err;
       if(data){
         var dataToSend = [];
