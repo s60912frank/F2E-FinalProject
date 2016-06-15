@@ -2,6 +2,27 @@
 
 }
 
+#issueTitle{
+    background-color: darkseagreen;
+}
+
+#issueDescription{
+    background-color: darkseagreen;
+}
+
+#posterInfo{
+    background-color: darkseagreen;
+}
+
+
 #CommentSection{
+    background-color: darkseagreen;
+}
+
+.nickname{
+
+}
+
+.reply{
 
 }

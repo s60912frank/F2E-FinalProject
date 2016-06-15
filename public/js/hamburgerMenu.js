@@ -3,11 +3,13 @@ var main = function () {
         $('#HamburgerMenu').animate({
             right: "0px"
         }, 200);
+        $('#shadeCover').fadeIn(200);
     });
-    $('#CrossIcon').click(function () {
+    $('#shadeCover').click(function () {
         $('#HamburgerMenu').animate({
             right: "-500px"
         }, 500);
+        $('#shadeCover').fadeOut(500);
     });
 };
 
