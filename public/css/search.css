@@ -5,11 +5,35 @@
   margin-bottom: 0.5em;
   background-color: green;
   border-radius: 0.5em;
-  color: white;
-  font-size: 2em;
+  /*color: white;
+  font-size: 2em;*/
   padding-left: 1em;
   display: inline-block;
-  text-align: left;
+
+}
+
+.title {
+  float: left;
+  font-size: 2em;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.messageCount {
+  height: 100%;
+  float: right;
+}
+
+.messageCount img {
+  height: 100%;
+  display: inline-block;
+  margin: 0;
+}
+
+.messageCount p {
+  display: inline-block;
+  font-size: 2em;
+  margin: 0;
 }
 
 #searchResultContainer {

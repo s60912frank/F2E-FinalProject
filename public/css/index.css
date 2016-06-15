@@ -60,15 +60,26 @@ body {
   height: 100px;
   width: 60%;
   background-color: yellow;
-  margin-top: 250px;
+  margin-top: 200px;
   margin-left: 5%;
   display: inline-block;
+}
+
+#welcomeText {
+  height: 50px;
+  width: 60%;
+  color: white;
+  margin-top: 75px;
+  margin-left: 5%;
+  display: inline-block;
+  background-color: black;
+  font-size: 2.5em;
 }
 
 #buttons{
   float: right;
   display: inline-block;
-  margin-top: 350px;
+  margin-top: 250px;
   margin-right: 2%;
   margin-bottom: 50px;
   width: 35%;
@@ -131,7 +142,7 @@ footer {
 
   #buttons{
     display: inline-block;
-    margin-top: 300px;
+    margin-top: 200px;
     margin-right: 10%;
     margin-bottom: 50px;
     width: 50%;
@@ -163,17 +174,20 @@ footer {
   }
 
   #slogan {
-    height: 100px;
     width: 80%;
-    background-color: yellow;
     margin-top: 250px;
     margin-left: 10%;
-    display: inline-block;
+  }
+
+  #welcomeText {
+    width: 80%;
+    margin-top: 75px;
+    margin-left: 10%;
   }
 
   #buttons{
     display: inline-block;
-    margin-top: 200px;
+    margin-top: 75px;
     margin-right: 20%;
     margin-bottom: 50px;
     width: 60%;

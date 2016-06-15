@@ -2,15 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>嘴砲</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-  <h1>歡迎來到嘴砲擂台</h1>
-  <a href="/auth/facebook">
-    <button>以FB登入</button>
-  </a>
-  <a href="/topicList">議題列表</a>
-  <a href="/hot">熱門議題</a>
-  <h1>一句經典的slogan</h1>
+  <div id="landing">
+    <div id="navbar">
+      <div class="container">
+        <div id="logo">
+          <img src="./image/logo.png" alt="">
+        </div>
+        <img src="./image/searchIcon.png" id="searchIcon" class="dynMarginTop">
+        <input type="text" id="searchInput" class="dynMarginTop">
+      </div>
+    </div>
+    <div class="container">
+      <div id="slogan">SLOGAN</div>
+      <% var welcomeText = isAuthenticated ? user.name + "，歡迎回來嘴砲!" : "登入後開始嘴砲!"
+         var loginButtonText = isAuthenticated ? "登出" : "FB登入"
+         var loginButtonLink = isAuthenticated ? "/logout" : "/auth/facebook" %>
+      <div id="welcomeText"><%= welcomeText %></div>
+      <div id="buttons">
+        <a href="/topicList">
+          <div class="button">議題列表</div>
+        </a>
+        <a href=<%= loginButtonLink %>>
+          <div class="button"><%= loginButtonText %></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="fillParentWidth" id="hot">
+    <div class="container">
+      <div class="fillParentWidth" id="titleContainer">
+        <h1 id="hotTitle">熱門議題</h1>
+      </div>
+      <svg class="fillParentWidth"></svg>
+    </div>
+  </div>
+
+  <footer class="fillParentWidth">
+    HERE IS FOOTER!
+  </footer>
+
+  <script src="./js/jquery-3.0.0.min.js"></script>
+  <script src="./js/d3.min.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 </html>
