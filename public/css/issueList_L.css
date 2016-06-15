@@ -22,6 +22,7 @@
   margin: 0;
   width: 1280px;
   display: inline-block;
+  background-color: #42A5F5;
 }
 
 .issue_list{
@@ -31,6 +32,7 @@
   margin-right: 28%;
   display: inline-block;
   float: right;
+  background-color: grey;
 }
 
 .hot_issue{
@@ -39,6 +41,7 @@
   width: 44.6875%;
   display: inline-block;
   float: left;
+  background-color: grey;
 }
 
 .latest_issue{
@@ -47,12 +50,16 @@
   width: 44.6875%;
   display: inline-block;
   float: left;
+  background-color: grey;
 }
 
 .all_issue{
   margin-top: 57px;
   margin-left: 3.90625%;
-  width: 92.34375%;
+  width: 80%;
+  display: inline-block;
+  float: left;
+  background-color: grey;
 }
 
 }
