@@ -53,12 +53,12 @@ body {
 #landing {
   background-image: url('../image/cover.jpg');
   background-size: cover;
-  height: 500px;
+  height: 800px;
 }
 
 #slogan {
-  height: 50px;
-  width: 50%;
+  height: 100px;
+  width: 60%;
   background-color: yellow;
   margin-top: 250px;
   margin-left: 5%;
@@ -68,7 +68,7 @@ body {
 #buttons{
   float: right;
   display: inline-block;
-  margin-top: 400px;
+  margin-top: 350px;
   margin-right: 2%;
   margin-bottom: 50px;
   width: 35%;
@@ -89,11 +89,17 @@ body {
 
 #hot {
   background-color: #FFAAAA;
-  text-align: center;
 }
 
 #hotTitle {
   margin: 0px;
+  display: inline-block;
+  margin-top: 1em;
+}
+
+#titleContainer {
+  text-align: center;
+  display: inline-block;
 }
 
 footer {
@@ -122,6 +128,25 @@ footer {
   #searchInput {
     width: 40%;
   }
+
+  #buttons{
+    display: inline-block;
+    margin-top: 300px;
+    margin-right: 10%;
+    margin-bottom: 50px;
+    width: 50%;
+  }
+
+  .button {
+    height: 35px;
+    width: 40%;
+    background-color: white;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    margin-left: 5%;
+    text-align: center;
+    display: inline-block;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -138,17 +163,17 @@ footer {
   }
 
   #slogan {
-    height: 50px;
+    height: 100px;
     width: 80%;
     background-color: yellow;
-    margin-top: 150px;
+    margin-top: 250px;
     margin-left: 10%;
     display: inline-block;
   }
 
   #buttons{
     display: inline-block;
-    margin-top: 70px;
+    margin-top: 200px;
     margin-right: 20%;
     margin-bottom: 50px;
     width: 60%;
