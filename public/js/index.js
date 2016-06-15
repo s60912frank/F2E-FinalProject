@@ -36,7 +36,19 @@ $(document).ready(
           window.location = '/search?text=' + $('#searchInput').val();
         }
         else{
-          //do something
+          alert("關鍵字不能為空!");
+        }
+      }
+    });
+
+    $('#searchInput').keypress(function(e){
+      if(e.which == 13){
+        var searchText = $(this).val();
+        if(searchText != ""){
+          window.location = '/search?text=' + $('#searchInput').val();
+        }
+        else{
+          alert("關鍵字不能為空!");
         }
       }
     });

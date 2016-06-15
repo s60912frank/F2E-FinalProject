@@ -83,6 +83,8 @@ body {
   margin-left: 10%;
   text-align: center;
   display: inline-block;
+  border-radius: 5px;
+  font-size: 2em;
 }
 
 #hot {
