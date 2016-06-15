@@ -1,0 +1,44 @@
+.searchResult {
+  width: 80%;
+  height: 50px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: green;
+  border-radius: 0.5em;
+  color: white;
+  font-size: 2em;
+  padding-left: 1em;
+  display: inline-block;
+  text-align: left;
+}
+
+#searchResultContainer {
+  text-align: center;
+}
+
+.container {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.fillParentWidth {
+  width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+}
