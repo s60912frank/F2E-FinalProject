@@ -1,5 +1,12 @@
 #TopicSection{
+    text-align: center;
+    height: 300px;
+}
 
+#TopicSectionLeft {
+    display: inline-block;
+    margin-right: 106px;
+    width: 853px;
 }
 
 #issueTitle{
@@ -10,19 +17,29 @@
     background-color: darkseagreen;
 }
 
+#TopicSectionRight {
+    display: inline-block;
+    width: 320px;
+}
+
 #posterInfo{
     background-color: darkseagreen;
 }
 
 
 #CommentSection{
-    background-color: darkseagreen;
+    text-align: center;
 }
 
 .nickname{
-
+    background-color: darkseagreen;
+    display: inline-block;
+    width: 177.5px;
+    margin-right: 35.5px;
 }
 
 .reply{
-
+    background-color: darkseagreen;
+    display: inline-block;
+    width: 1066px;
 }
