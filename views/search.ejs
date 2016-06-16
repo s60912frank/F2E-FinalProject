@@ -13,12 +13,14 @@
   <div id="shadeCover">
   </div>
   <header><!---->
-      <img id="Logo" src="./image/logo.png" />
+    <div class="container">
+      <a href="/"><img id="Logo" src="./image/logo.png" /></a>
       <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
+    </div>
   </header>
 
   <div class="container">
-    <h1><%= search.text %>搜尋結果</h1>
+    <h1><%= search.text %> 的搜尋結果</h1>
     <a href="./issueList.html"><<返回列表</a>
     <% if(search.result){
          if(search.result.length > 0){
