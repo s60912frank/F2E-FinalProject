@@ -22,26 +22,29 @@
   <div class="container">
     <h1><%= search.text %> 的搜尋結果</h1>
     <a href="./issueList.html"><<返回列表</a>
+    <div id="searchResultContainer">
     <% if(search.result){
          if(search.result.length > 0){
            for(var i = 0; i < search.result.length; i++){
-             var link = "/topic?title=" + search.result[i].name; %>
-             <a href=<%= link %>>
-               <div id="searchResultContainer">
-                 <div class="searchResult">
-                   <p class="title"><%= search.result[i].name %></p>
-                   <div class="messageCount">
-                     <img src="./image/messageIcon.png" alt="">
-                     <p><%= search.result[i].commentsCount %></p>
-                   </div>
-                 </div>
+             var link = "/topic?title=" + search.result[i].name;
+             var date = search.result[i].time;
+             var timeString = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes();%>
+             <div class="searchResult">
+               <a href=<%= link %>>
+                 <div class="titleContainer"><p><%= search.result[i].name %></p></div>
+               </a>
+               <div class="dateContainer"><p><%= timeString %></p></div>
+               <div class="messageCount">
+                 <img src="./image/messageIcon.png" alt="">
+                 <p><%= search.result[i].commentsCount %></p>
                </div>
-             </a>
+             </div>
            <% } %>
         <% } else{ %>
            <div class="noResult"><h1>查無結果!</h1></div>
         <% } %>
     <% } %>
+    </div>
   </div>
   <script src="./js/jquery-3.0.0.min.js"></script>
   <script src="./js/hamburgerMenu.js"></script>
