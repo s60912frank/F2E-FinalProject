@@ -26,7 +26,7 @@
     <% if(search.result){
          if(search.result.length > 0){
            for(var i = 0; i < search.result.length; i++){
-             var link = "/topic?title=" + search.result[i].name;
+             var link = "/issue?title=" + search.result[i].name;
              var date = search.result[i].time;
              var timeString = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes();%>
              <div class="searchResult">
