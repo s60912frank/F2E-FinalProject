@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>issue page</title>
+    <link rel="stylesheet" href="./css/common.css" /><!--CSS for <header> <footer> "hamburger menu" ONLY-->
+    <link rel="stylesheet" href="./css/issue.css" />
+</head>
+<body>
+    <div id="HamburgerMenu"></div><!--place between <body> and <header>-->
+    <div id="shadeCover"></div><!--place between <body> and <header>-->
+    <header><!--Same <header> in every page-->
+      <div class="container">
+        <a href="/"><img id="Logo" src="./image/logo.png" /></a>
+        <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
+      </div>
+    </header>
+    <div id="TopicSection" class="container">
+        <div id="TopicSectionLeft">
+            <div id="issueTitle">
+                <h1>Issue Title <%= issue.name %></h1>
+            </div>
+            <div id="issueDescription">
+                <h1>Issue Description</h1>
+            </div>
+        </div>
+        <div id="TopicSectionRight">
+            <div id="posterInfo">
+              <% var date = issue.time;
+              var timeString = '@' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes(); %>
+              <h1>Info <%= timeString %></h1>
+            </div>
+        </div>
+    </div>
+
+    <div id="CommentSection" class="container">
+      <% for(var i = issue.comments.length - 1;i >= 0;i--){
+          var date = issue.comments[i].time;
+          var timeString = '@' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes(); %>
+        <div class="comment">
+          <div class="nickname"><p><%= issue.comments[i].name %></p></div>
+          <div class="reply">
+            <% if(issue.comments[i].comment.indexOf(".jpg") != -1 ||
+                  issue.comments[i].comment.indexOf(".jpeg") != -1 ||
+                  issue.comments[i].comment.indexOf(".png") != -1 ||
+                  issue.comments[i].comment.indexOf(".gif") != -1) { %>
+              <a href=<%= issue.comments[i].comment %>>
+                <img src=<%= issue.comments[i].comment %> alt="" style="max-width: 400px">
+              </a>
+            <% } else if(issue.comments[i].comment.indexOf("www.youtube.com") != -1){
+              var text = issue.comments[i].comment
+              var vid = text.substring(text.indexOf("?v=") + 3, text.length);
+              var embedUrl = "https://www.youtube.com/embed/" + vid + "?rel=0" %>
+              <iframe width="560" height="315" src=<%= embedUrl %> frameborder="0" allowfullscreen></iframe>
+            <% } else{ %>
+               <p><%= issue.comments[i].comment %></p>
+            <% } %>
+            <p><%= timeString %></p>
+          </div>
+        </div>
+      <% } %>
+    </div>
+    <footer><!--Same <footer> in every page-->
+        <h1>Copyrights in footer, maybe?</h1>
+    </footer>
+    <script src="./js/jquery-3.0.0.min.js"></script><!--Link to script for hamburger menu after </footer>-->
+    <script src="./js/hamburgerMenu.js"></script><!--Link to script for hamburger menu after </footer>-->
+</body>
+</html>

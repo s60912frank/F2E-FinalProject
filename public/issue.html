@@ -10,25 +10,36 @@
     <div id="HamburgerMenu"></div><!--place between <body> and <header>-->
     <div id="shadeCover"></div><!--place between <body> and <header>-->
     <header><!--Same <header> in every page-->
-        <img id="Logo" src="./image/logo.png" />
+      <div class="container">
+        <a href="/"><img id="Logo" src="./image/logo.png" /></a>
         <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
+      </div>
     </header>
-    <div id="TopicSection">
-        <div style="display:inline-block">
+    <div id="TopicSection" class="container">
+        <div id="TopicSectionLeft">
             <div id="issueTitle">
                 <h1>Issue Title</h1>
             </div>
             <div id="issueDescription">
                 <h1>Issue Description</h1>
             </div>
+        </div>
+        <div id="TopicSectionRight">
             <div id="posterInfo">
-                <h1>Poster Information</h1>
+                <h1>Info</h1>
             </div>
         </div>
     </div>
-    <div id="CommentSection">
-        <div class="nickname">nickname&</div>
-        <div class="reply">reply</div>
+    
+    <div id="CommentSection" class="container">
+        <div class="nickname"><p>nickname</p></div>
+        <div class="reply"><p>reply</p></div>
+
+        <div class="nickname"><p>nickname</p></div>
+        <div class="reply"><p>reply</p></div>
+
+        <div class="nickname"><p>nickname</p></div>
+        <div class="reply"><p>reply</p></div>
     </div>
     <footer><!--Same <footer> in every page-->
         <h1>Copyrights in footer, maybe?</h1>

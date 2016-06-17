@@ -2,7 +2,10 @@ var User = require('./models/user'); //資料庫USER的shema
 var Topic = require('./models/topic'); //資料庫TOPIC的shema
 module.exports = function(app, passport, ioop) {
   app.get('/', function(req, res){
-    res.render('index.ejs');
+    res.render('index.ejs', {
+      isAuthenticated: req.isAuthenticated(),
+      user: req.user
+    });
   });
 
   app.get('/topicList', function(req, res){
@@ -35,7 +38,7 @@ module.exports = function(app, passport, ioop) {
         data.forEach(function(d){
           dataToSend.push({
             title: d.name,
-            link: "/topic?title=" + d.name,
+            link: "/issue?title=" + d.name,
             value: d.commentsCount
           });
         });
@@ -74,14 +77,15 @@ module.exports = function(app, passport, ioop) {
     }
   };
 
-  app.get('/topic', function(req, res){
+  app.get('/issue', function(req, res){
     Topic.findOne({ name: req.query.title }, function(err, topic){
       if(err) throw err;
       if(topic){
         idToNickname(topic, 0, function(){
-          res.render('topic.ejs', {
+          console.log(topic);
+          res.render('issue.ejs', {
             user: req.user,
-            topic: topic,
+            issue: topic,
             isAuthenticated: req.isAuthenticated()
           });
         });
