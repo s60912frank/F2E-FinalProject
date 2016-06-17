@@ -118,10 +118,14 @@ module.exports = function(app, passport, ioop) {
       if(!topic){
         var newTopic = new Topic();
         newTopic.name = req.body.name;
+        newTopic.category = req.body.category;
+        newTopic.desc = req.body.desc;
+        newTopic.opinion = req.body.opinion;
         newTopic.time = new Date();
         newTopic.comments = undefined;
         newTopic.commentsCount = 0;
         newTopic.startedBy = req.user._id;
+        console.log(newTopic);
         newTopic.save(function(err) {
           if (err) throw err;
           console.log(newTopic.name + " created!");

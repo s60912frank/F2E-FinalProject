@@ -1,33 +1,25 @@
-body{
-  margin-left: 7%;
-  margin-right: 7%;
-}
-
-#logo{
-  /*height: 70%;
-  width: 30%;*/
-  width: 300px;
-  margin-left: 30px;
-}
-
 #createTitle{
   margin-left: 8%;
-  margin-top: 50px;
+  margin-top: 25px;
+}
+
+#createTitle input {
+  width: 25%;
 }
 
 #discribeContent{
   margin-left: 8%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 #category{
   margin-left: 8%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 #opinion{
   margin-left: 8%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 #submit{

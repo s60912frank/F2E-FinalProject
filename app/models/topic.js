@@ -4,8 +4,11 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var topicSchema = mongoose.Schema({
   name: String,
+  category: String,
   time: Date,
   startedBy: String, //uid
+  desc: String,
+  opinion: String,
   comments: [{
     uid: String,
     comment: String,

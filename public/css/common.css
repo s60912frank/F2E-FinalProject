@@ -1,9 +1,10 @@
 header{
-    background-color: green;
+    background-color: #FFB74D;
     height: 75px;
 }
 body{
     margin: 0;
+    background-color: #FFFDE7;
 }
 
 #Logo{
@@ -35,7 +36,7 @@ body{
 }
 
 footer{
-    background-color:green;
+    background-color: #FFB74D;
 }
 
 
