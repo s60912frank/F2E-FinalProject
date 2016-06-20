@@ -1,20 +1,19 @@
 .searchResult {
-  width: 95%;
+  width: 100%;
   height: 50px;
   margin-bottom: 2px;
-  display: inline-block;
+  text-align: center;
 }
 
 .searchResult div {
-  background-color: green;
-  color: white;
+  background-color: #8EB4E3;
+  color: black;
 }
 
 .titleContainer {
   height: 100%;
-  width: 65%;
+  width: 64%;
   padding-left: 0.5em;
-  margin-left: 1%;
   display: inline-block;
 }
 
@@ -27,23 +26,22 @@
 
 .dateContainer {
   height: 100%;
-  width: 15%;
-  margin-left: 1%;
-  margin-top: -50px;
-  padding-left: 0.5em;
+  width: 140px;
   display: inline-block;
+  text-align: center;
 }
 
 .dateContainer p {
-  font-size: 1.5em;
+  font-size: 2em;
   margin: 0;
+  margin-left: 10px;
+  margin-top: 6px;
   float: left;
 }
 
 .messageCount {
   height: 100%;
-  width: 10%;
-  margin-left: 1%;
+  width: 100px;
   display: inline-block;
 }
 
@@ -58,33 +56,28 @@
   float: right;
   font-size: 2em;
   margin: 0;
+  margin-top: 6px;
 }
 
 #searchResultContainer {
-  text-align: center;
-}
-
-@media screen and (min-width: 1280px) {
-
-}
-
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-
+  display: flex;
+  justify-content: space-around;
 }
 
 @media screen and (max-width: 767px) {
   .titleContainer {
-    width: 100%;
+    width: 95%;
     margin: 0;
+    margin-top: 5px;
   }
 
   .dateContainer {
-    width: 60%;
+    width: 70%;
     margin: 0;
   }
 
   .messageCount {
-    width: 35%;
+    width: 25%;
     margin: 0;
   }
 }
