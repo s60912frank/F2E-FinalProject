@@ -54,7 +54,7 @@
 .our_info_left{
   border: 2px solid blue;
   height: 200px;
-  width: 68.87%;
+  width: 58.265%;
   background-color: #8EB4E3;
   margin-left: 11.2%;
   float: left;
@@ -64,9 +64,9 @@
 .our_info_right{
   border: 2px solid blue;
   height: 200px;
-  width: 68.87%;
+  width: 58.265%;
   background-color: #8EB4E3;
-  margin-right: 11.2%;
+  margin-right: 11.9%;
   float: right;
   display: inline-block;
 }
@@ -80,4 +80,16 @@ footer{
 
 footer p{
   text-align: center;
+}
+
+.li_left {
+  font-size: 2em;
+  margin-top: 30px;
+  text-align: left;
+}
+
+.li_right {
+  font-size: 2em;
+  margin-top: 30px;
+  text-align:left;
 }
