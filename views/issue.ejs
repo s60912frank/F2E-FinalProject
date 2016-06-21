@@ -25,7 +25,25 @@
               </div>
               <div id="issueDescription">
                   <h1>Issue Description</h1>
-                  <div><%= issue.desc %></div>
+                  <div>
+                    <% if(issue.desc){
+                        if(issue.desc.indexOf("http") != -1 || issue.desc.indexOf("https") != -1){
+                        if(issue.desc.indexOf(".jpg") != -1 || issue.desc.indexOf(".jpeg") != -1 ||
+                           issue.desc.indexOf(".png") != -1 || issue.desc.indexOf(".gif") != -1) { %>
+                             <a href=<%= issue.desc %>>
+                               <img src=<%= issue.desc %> alt="" id="descImg">
+                             </a>
+                        <% } else if(issue.desc.indexOf("www.youtube.com") != -1) {
+                             var text = issue.desc;
+                             var vid = text.substring(text.indexOf("?v=") + 3, text.length);
+                             var embedUrl = "https://www.youtube.com/embed/" + vid + "?rel=0" %>
+                             <iframe width="560" height="315" src=<%= embedUrl %> frameborder="0" allowfullscreen id="descYt"></iframe>
+                        <% } else { %>
+                        <a href=<%= issue.desc %>><p class="commentText"><%= issue.desc %></p></a>
+                        <% }
+                     }
+                   } %>
+                  </div>
               </div>
           </div>
           <div id="TopicSectionRight">
@@ -55,13 +73,17 @@
           <div class="comment">
             <div class="nickname"><p><%= issue.comments[i].name %></p></div>
             <div class="reply">
-              <p class="commentText"><%= comment %></p>
-              <% if(comment.indexOf(".jpg") != -1 ||
-                    comment.indexOf(".jpeg") != -1 ||
-                    comment.indexOf(".png") != -1 ||
-                    comment.indexOf(".gif") != -1 ||
-                    comment.indexOf("www.youtube.com") != -1) { %>
-                <button class="expand">展開</button>
+              <% if(comment.indexOf("http") != -1 || comment.indexOf("https") != -1){
+                    if(comment.indexOf(".jpg") != -1 || comment.indexOf(".jpeg") != -1 ||
+                       comment.indexOf(".png") != -1 || comment.indexOf(".gif") != -1 ||
+                       comment.indexOf("www.youtube.com") != -1) { %>
+                      <p class="commentText"><%= comment %></p>
+                      <button class="expand">展開</button>
+                    <% } else { %>
+                      <a href=<%= comment %>><p class="commentText"><%= comment %></p></a>
+                    <% } %>
+              <% } else { %>
+                <p class="commentText"><%= comment %></p>
               <% } %>
               <p><%= timeString %></p>
             </div>

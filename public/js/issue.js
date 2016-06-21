@@ -4,17 +4,26 @@ $(document).ready(
     socket.emit('topic', { topic: $('#issueTitle div').text() });
     socket.on('comment', function(data){
       var component = '<div class="comment"><div class="nickname"><p>' + data.name + '</p></div>'+
-                       '<div class="reply"><p class="commentText">' + data.comment + '</p>';
+                       '<div class="reply">';
       var time = new Date(data.time);
       var timeString = '@' + (time.getMonth() + 1) + '/' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
-      if(data.comment.indexOf(".jpg") != -1 ||
-         data.comment.indexOf(".jpeg") != -1 ||
-         data.comment.indexOf(".png") != -1 ||
-         data.comment.indexOf(".gif") != -1 ||
-         data.comment.indexOf("www.youtube.com") != -1) {
-        component += '<button class="expand">展開</button>';
+      if(data.comment.indexOf("http") != -1 || data.comment.indexOf("https") != -1){
+        console.log("WHEEEE");
+        if(data.comment.indexOf(".jpg") != -1 ||
+           data.comment.indexOf(".jpeg") != -1 ||
+           data.comment.indexOf(".png") != -1 ||
+           data.comment.indexOf(".gif") != -1 ||
+           data.comment.indexOf("www.youtube.com") != -1) {
+          component += '<p class="commentText">' + data.comment + '</p><button class="expand">展開</button>';
+        }
+        else{
+          component += '<a href=' + data.comment + '><p class="commentText">' + data.comment + '</p></a>';
+        }
       }
-      component += '<p>' + timeString + '</p></div></div>';
+      else{
+        component += '<p class="commentText">' + data.comment + '</p></a>';
+      }
+      component += '<p>&nbsp;' + timeString + '</p></div></div>';
       $('#CommentSection').prepend(component);
     });
     //點按鈕展開!

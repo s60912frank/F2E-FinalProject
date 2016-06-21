@@ -19,6 +19,15 @@
     background-color: #2196F3;
 }
 
+#descImg {
+  width: 100%;
+}
+
+#descYt {
+  width: 100%;
+  max-width: 560px;
+}
+
 #TopicSectionRight {
     width: 30%;
     height: 100%;
@@ -88,15 +97,35 @@
 
 .expandedContent {
   width: 100%;
+  margin-left: -0.5em;
   display: none;
 }
 
 .expandedContent img {
-  width: 98%;
-  margin-left: 1%;
+  width: 100%;
   float: left;
 }
 
 .expandedContent iframe {
   max-width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #TopicSection {
+    flex-wrap: wrap;
+  }
+
+  #TopicSectionLeft {
+    width: 100%;
+  }
+
+  #TopicSectionRight {
+    width: 100%;
+  }
 }

@@ -39,7 +39,7 @@
       <div class = "latest_issue">
         <div class="issueSectionTitle"><p>最新議題</p></div>
         <% if(latest){
-          latest.forEach(function(entry){ 
+          latest.forEach(function(entry){
             var link = '/issue?title=' + entry.name %>
             <a href=<%= link %>>
               <div class="issueEntry"><%= entry.name %></div>
@@ -48,9 +48,11 @@
         } %>
       </div>
 
-      <div class = "all_issue">
-        <p>全部議題</p>
-      </div>
+      <a href="/allIssue">
+        <div class = "all_issue">
+          <p>全部議題</p>
+        </div>
+      </a>
 
     </div>
     <footer>
