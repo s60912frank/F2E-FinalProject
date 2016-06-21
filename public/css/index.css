@@ -1,6 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+* {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
 body {
   margin: 0px;
-  background-color: #BBBBBB;
+  background-color: #FEF4EC;
 }
 
 #navbar {
@@ -22,10 +27,12 @@ body {
 }
 
 #searchInput {
-  border-radius: 1em;
+  border-radius: 0.5em;
+  border-color: transparent;
   width: 25%;
   height: 50%;
   display: inline-block;
+  margin-right: 0.5em;
   float: right;
   font-size: 2em;
 }
@@ -42,42 +49,43 @@ body {
 }
 
 #landing {
-  background-image: url('../image/cover.jpg');
+  background-image: url('../image/cover.png');
   background-size: cover;
   height: 800px;
 }
 
 #slogan {
   height: 100px;
-  width: 60%;
-  background-color: yellow;
+  width: 70%;
   margin-top: 200px;
   margin-left: 5%;
   display: inline-block;
+}
+
+#slogan img {
+  width: 100%;
 }
 
 #welcomeText {
   height: 50px;
   width: 60%;
   color: white;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-left: 5%;
   display: inline-block;
-  background-color: black;
   font-size: 2.5em;
 }
 
 #buttons{
   float: right;
   display: inline-block;
-  margin-top: 250px;
+  margin-top: 180px;
   margin-right: 2%;
   margin-bottom: 50px;
   width: 35%;
 }
 
 .button {
-  height: 35px;
   width: 35%;
   background-color: white;
   margin-top: 0px;
@@ -87,10 +95,7 @@ body {
   display: inline-block;
   border-radius: 5px;
   font-size: 2em;
-}
-
-#hot {
-  background-color: #FFAAAA;
+  color: black;
 }
 
 #hotTitle {

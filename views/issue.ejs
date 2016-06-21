@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/issue.css" />
 </head>
 <body>
+    <% var formatTime = function(text) { return text < 10 ? '0' + text : text } %>
     <div id="HamburgerMenu"></div><!--place between <body> and <header>-->
     <div id="shadeCover"></div><!--place between <body> and <header>-->
     <header><!--Same <header> in every page-->
@@ -20,11 +21,11 @@
       <div id="TopicSection">
           <div id="TopicSectionLeft">
               <div id="issueTitle">
-                  <h1>Issue Title</h1>
+                  <h1>標題</h1>
                   <div><%= issue.name %></div>
               </div>
               <div id="issueDescription">
-                  <h1>Issue Description</h1>
+                  <h1>議題描述</h1>
                   <div>
                     <% if(issue.desc){
                         if(issue.desc.indexOf("http") != -1 || issue.desc.indexOf("https") != -1){
@@ -47,11 +48,15 @@
                    } %>
                   </div>
               </div>
+              <div id="posterOpinion">
+                <h1>樓主看法</h1>
+                <p><%= issue.opinion %></p>
+              </div>
           </div>
           <div id="TopicSectionRight">
               <div id="posterInfo">
                 <% var date = issue.time;
-                var timeString = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes(); %>
+                var timeString = formatTime(date.getMonth() + 1) + '/' + formatTime(date.getDate()) + ' ' + formatTime(date.getHours()) + ":" + formatTime(date.getMinutes()); %>
                 <h1>Info</h1>
                 <div><%= issue.startedBy %> 發表於 <%= timeString %></div>
               </div>
@@ -70,7 +75,7 @@
       <div id="CommentSection">
         <% for(var i = issue.comments.length - 1;i >= 0;i--){
             var date = issue.comments[i].time;
-            var timeString = '@' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes();
+            var timeString = '@' + formatTime(date.getMonth() + 1) + '/' + formatTime(date.getDate()) + ' ' + formatTime(date.getHours()) + ":" + formatTime(date.getMinutes());
             var comment = issue.comments[i].comment; %>
           <div class="comment">
             <div class="nickname"><p><%= issue.comments[i].name %></p></div>

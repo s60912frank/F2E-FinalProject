@@ -8,6 +8,7 @@
   </head>
 
   <body>
+    <% var formatTime = function(text) { return text < 10 ? '0' + text : text } %>
     <div id="HamburgerMenu"><!---->
     </div>
     <div id="shadeCover">
@@ -49,7 +50,7 @@
             latest.forEach(function(entry){
               var link = '/issue?title=' + entry.name;
               var date = entry.time;
-              var timeString = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes(); %>
+              var timeString = formatTime(date.getMonth() + 1) + '/' + formatTime(date.getDate()) + ' ' + formatTime(date.getHours()) + ":" + formatTime(date.getMinutes()); %>
               <div class="issueEntry">
                 <a href=<%= link %>>
                   <p><%= entry.name %></p>

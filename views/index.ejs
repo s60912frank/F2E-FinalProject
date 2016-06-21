@@ -19,7 +19,9 @@
       </div>
     </div>
     <div class="container">
-      <div id="slogan">SLOGAN</div>
+      <div id="slogan">
+        <img src="./image/slogan.png" alt="">
+      </div>
       <% var welcomeText = isAuthenticated ? user.name + "，歡迎回來嘴砲!" : "登入後開始嘴砲!"
          var loginButtonText = isAuthenticated ? "登出" : "FB登入"
          var loginButtonLink = isAuthenticated ? "/logout" : "/auth/facebook" %>
