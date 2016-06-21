@@ -1,37 +1,26 @@
+var socket = io('http://localhost:8080');
 $(document).ready(
   function(){
-    var socket = io('http://localhost:8080');
     socket.emit('topic', { topic: $('#issueTitle div').text() });
     socket.on('comment', function(data){
-      var component = '<span class="commentBy">' + data.name + '</span>';
+      var component = '<div class="comment"><div class="nickname"><p>' + data.name + '</p></div>'+
+                       '<div class="reply"><p class="commentText">' + data.comment + '</p>';
       var time = new Date(data.time);
-      var timeString = (time.getMonth() + 1) + '/' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
-      if(data.comment.indexOf(".jpg") != -1 || data.comment.indexOf(".jpeg") != -1 || data.comment.indexOf(".png") != -1 || data.comment.indexOf(".gif") != -1) {
-        component += ':' + '<a href=' + data.comment + '><img src=' + data.comment + ' style="max-width: 400px"></a>@' + timeString;
+      var timeString = '@' + (time.getMonth() + 1) + '/' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
+      if(data.comment.indexOf(".jpg") != -1 ||
+         data.comment.indexOf(".jpeg") != -1 ||
+         data.comment.indexOf(".png") != -1 ||
+         data.comment.indexOf(".gif") != -1 ||
+         data.comment.indexOf("www.youtube.com") != -1) {
+        component += '<button class="expand">展開</button>';
       }
-      else if(data.comment.indexOf("www.youtube.com") != -1){
-        var text = data.comment;
-        var vid = text.substring(text.indexOf("?v=") + 3, text.length);
-        var embedUrl = "https://www.youtube.com/embed/" + vid + "?rel=0";
-        component += ':' + '<iframe width="560" height="315" src=' + embedUrl + ' frameborder="0" allowfullscreen></iframe>@' + timeString;
-      }
-      else {
-        component += ':' + data.comment + "@" + timeString;
-      }
-      //alert(component);
-      $('#commentList').prepend('<li>' + component + '</li>');
+      component += '<p>' + timeString + '</p></div></div>';
+      $('#CommentSection').prepend(component);
     });
-    socket.on('nickNameChanged', function(data){
-      $('#commentList').children($('<li>')).each(function(){
-        if($(this).children('.commentBy').text() == data.from){
-          $(this).children('.commentBy').text(data.to);
-        }
-      });
-    });
-
     //點按鈕展開!
-    $('.expand').click(
+    $(document).on('click','.expand',
       function(){
+        console.log("EXPAND!");
         var jthis = $(this);
         if(jthis.text() == "展開"){
           var commentText = jthis.siblings(".commentText").text();
@@ -45,6 +34,20 @@ $(document).ready(
         }
       }
     );
+
+    $('#replySection button').click(function(){
+      if($(this).siblings('input').val() != ''){
+        sendComment($(this).siblings('input').val());
+        $(this).siblings('input').val("");
+      }
+    });
+
+    $('#replySection input').keypress(function(e){
+      if(e.which == 13 && $(this).val() != ''){
+        sendComment($(this).val());
+        $(this).val("");
+      }
+    });
   }
 );
 
@@ -59,4 +62,14 @@ var convertText = function(text){
     component += '<iframe width="560" height="315" src=' + embedUrl + ' frameborder="0" allowfullscreen></iframe>';
   }
   return component;
+}
+
+var sendComment = function(text){
+  socket.emit('comment', {
+    comment: text
+  });
+  $.post('/comment', {
+    topic: $('#issueTitle div').text(),
+    comment: text
+  });
 }

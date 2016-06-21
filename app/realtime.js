@@ -15,14 +15,8 @@ module.exports = function(io){
     socket.on('comment', function(data){
       if(socket.request.user.logged_in){
         data['time'] = new Date();
+        data['name'] = socket.request.user.nickname;
         io.sockets.in(socket.topic).emit('comment', data);
-      }
-    });
-
-    socket.on('nickNameChanged', function(data){
-      if(socket.request.user.logged_in){
-        io.sockets.in(socket.topic).emit('nickNameChanged', data);
-        console.log("NICK NICK!");
       }
     });
   });

@@ -8,24 +8,35 @@ module.exports = function(app, passport, ioop) {
     });
   });
 
-  app.get('/topicList', function(req, res){
-    Topic.find({}, function(err, data){
+  app.get('/issueList', function(req, res){
+    Topic.find({}).sort('-commentsCount').limit(5).exec(function(err, hot){
       if(err) throw err;
-      if(data){
-        res.render('topicList.ejs', {
-          user: req.user,
-          topics: data,
-          isAuthenticated: req.isAuthenticated()
+      if(hot){
+        var hotTopics = hot;
+        Topic.find({}).sort('-_id').limit(5).exec(function(err, latestTopics){
+          if(err) throw err;
+          if(latestTopics){
+            res.render('issueList.ejs', {
+              user: req.user,
+              hot: hotTopics,
+              latest: latestTopics,
+              isAuthenticated: req.isAuthenticated()
+            });
+          }
         });
       }
     });
   });
 
-  app.get('/hot', function(req, res){
-    Topic.find({}).sort('-commentsCount').limit(3).exec(function(err, data){
+  app.get('/allTopics', function(req, res){
+    Topic.find({}, function(err, data){
       if(err) throw err;
       if(data){
-        res.render('hot.ejs', { topics: data });
+        res.render('allTopics.ejs', {
+          user: req.user,
+          topics: data,
+          isAuthenticated: req.isAuthenticated()
+        });
       }
     });
   });

@@ -25,7 +25,7 @@
               </div>
               <div id="issueDescription">
                   <h1>Issue Description</h1>
-                  <div>暫時6666666666666666</div>
+                  <div><%= issue.desc %></div>
               </div>
           </div>
           <div id="TopicSectionRight">
@@ -38,11 +38,14 @@
           </div>
       </div>
 
-      <!--有登入才可回應-->
-      <div id="replySection">
-        <input type="text">
-        <button>回應</button>
-      </div>
+
+      <% if(isAuthenticated){ %>
+        <!--有登入才可回應-->
+        <div id="replySection">
+          <input type="text">
+          <button>回應</button>
+        </div>
+      <% } %>
 
       <div id="CommentSection">
         <% for(var i = issue.comments.length - 1;i >= 0;i--){
