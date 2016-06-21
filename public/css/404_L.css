@@ -1,0 +1,31 @@
+@media screen and (min-width: 1280px){
+body{
+    background-color: black;
+}
+
+#logo{
+    width: 300px;
+}
+
+div h1{
+    font-size: 100px;
+}
+
+#main{
+    width: 700px;
+}
+
+#plug1{
+    display: inline-block;
+    position: absolute;
+    right: 75%;
+    z-index: 1;
+}
+
+#plug2{
+    position: absolute;
+    left: 52%;
+    z-index: 10;
+}
+
+}

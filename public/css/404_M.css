@@ -1,0 +1,39 @@
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+body{
+    background-color: black;
+}
+
+#logo{
+    width: 500px;
+    margin-top: 10px;
+}
+
+#logoArea{
+    text-align:center;
+}
+
+div h1{
+    font-size: 100px;
+}
+
+#main{
+    width: 70%;
+}
+
+#plugArea{
+    margin-top: 80px;
+}
+
+#plug1{
+    display: inline-block;
+    position: absolute;
+    right: 75%;
+    z-index: 1;
+}
+
+#plug2{
+    position: absolute;
+    left: 52%;
+    z-index: 10;
+}
+}
