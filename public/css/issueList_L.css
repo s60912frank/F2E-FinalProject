@@ -2,6 +2,12 @@ p{
   text-align: center;
 }
 
+#issueContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 .issue_list{
   margin-top: 55px;
   margin-left: 27.5%;
@@ -30,11 +36,29 @@ p{
 .issueEntry {
   background-color: #8EB4E3;
   width: 100%;
-  text-align: center;
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 2em;
-  padding: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
   box-sizing: border-box;
+}
+
+.issueEntry a {
+  text-decoration: none;
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 60%;
+}
+
+.issueEntry > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.issueEntry > div img {
+  height: 50px;
 }
 
 .latest_issue{

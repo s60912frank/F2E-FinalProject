@@ -94,10 +94,16 @@ module.exports = function(app, passport, ioop) {
       if(topic){
         idToNickname(topic, 0, function(){
           console.log(topic);
-          res.render('issue.ejs', {
-            user: req.user,
-            issue: topic,
-            isAuthenticated: req.isAuthenticated()
+          User.findOne({ _id: topic.startedBy }, function(err, user){
+            if(err) throw err;
+            if(user){
+              topic.startedBy = user.nickname;
+              res.render('issue.ejs', {
+                user: req.user,
+                issue: topic,
+                isAuthenticated: req.isAuthenticated()
+              });
+            }
           });
         });
       }

@@ -41,7 +41,9 @@
                         <% } else { %>
                         <a href=<%= issue.desc %>><p class="commentText"><%= issue.desc %></p></a>
                         <% }
-                     }
+                      } else { %>
+                        <p class="commentText"><%= issue.desc %></p>
+                     <% }
                    } %>
                   </div>
               </div>
@@ -51,7 +53,7 @@
                 <% var date = issue.time;
                 var timeString = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ":" + date.getMinutes(); %>
                 <h1>Info</h1>
-                <div><%= timeString %></div>
+                <div><%= issue.startedBy %> 發表於 <%= timeString %></div>
               </div>
           </div>
       </div>
@@ -73,19 +75,21 @@
           <div class="comment">
             <div class="nickname"><p><%= issue.comments[i].name %></p></div>
             <div class="reply">
-              <% if(comment.indexOf("http") != -1 || comment.indexOf("https") != -1){
-                    if(comment.indexOf(".jpg") != -1 || comment.indexOf(".jpeg") != -1 ||
-                       comment.indexOf(".png") != -1 || comment.indexOf(".gif") != -1 ||
-                       comment.indexOf("www.youtube.com") != -1) { %>
-                      <p class="commentText"><%= comment %></p>
-                      <button class="expand">展開</button>
-                    <% } else { %>
-                      <a href=<%= comment %>><p class="commentText"><%= comment %></p></a>
-                    <% } %>
-              <% } else { %>
-                <p class="commentText"><%= comment %></p>
+              <% if(comment){
+                   if(comment.indexOf("http") != -1 || comment.indexOf("https") != -1){
+                      if(comment.indexOf(".jpg") != -1 || comment.indexOf(".jpeg") != -1 ||
+                         comment.indexOf(".png") != -1 || comment.indexOf(".gif") != -1 ||
+                         comment.indexOf("www.youtube.com") != -1) { %>
+                        <p class="commentText"><%= comment %></p>
+                        <button class="expand">展開</button>
+                      <% } else { %>
+                        <a href=<%= comment %>><p class="commentText"><%= comment %></p></a>
+                      <% } %>
+                <% } else { %>
+                  <p class="commentText"><%= comment %></p>
+                <% } %>
+                <p><%= timeString %></p>
               <% } %>
-              <p><%= timeString %></p>
             </div>
           </div>
         <% } %>
