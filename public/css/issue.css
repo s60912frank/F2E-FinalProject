@@ -1,33 +1,30 @@
 #TopicSection{
-    text-align: center;
-    height: 300px;
+    width: 98%;
+    margin-left: 1%;
+    display: flex;
+    margin-bottom: 20px;
 }
 
 #TopicSectionLeft {
-    display: inline-block;
-    margin-right: 1%;
-    margin-left: 1%;
-    width: 65%;
+    width: 70%;
     height: 100%;
+    margin-right: 5px;
 }
 
-#issueTitle{
+#issueTitle h1{
     background-color: #FF9800;
 }
 
-#issueDescription{
+#issueDescription h1{
     background-color: #FF9800;
 }
 
 #TopicSectionRight {
-    display: inline-block;
-    width: 32%;
+    width: 30%;
     height: 100%;
-    margin-right: 1%;
-    float: right;
 }
 
-#posterInfo{
+#posterInfo h1 {
     background-color: #FF9800;
 }
 
@@ -36,6 +33,24 @@
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+#replySection {
+  width: 100%;
+  height: 50px;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
+}
+
+#replySection input {
+  height: 1em;
+  font-size: 2em;
+  width: 85%;
+  margin-right: 1em;
 }
 
 .comment {
@@ -65,4 +80,17 @@
 
 .reply p {
   display: inline-block;
+}
+
+.expandedContent {
+  width: 100%;
+  display: none;
+}
+
+.expandedContent img {
+  width: 100%;
+}
+
+.expandedContent iframe {
+  max-width: 100%;
 }
