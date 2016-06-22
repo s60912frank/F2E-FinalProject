@@ -13,7 +13,7 @@
     <ul>
       <li>
         <% if(isAuthenticated){ %>
-          <a href=""><%= user.name %></a>
+          <a href="/mypage"><%= user.name %></a>
         <% } else { %>
           <a href="/auth/facebook">Facebook登入</a>
         <% } %>
@@ -38,6 +38,7 @@
         <input type="text" id="searchInput">
         <img src="./image/searchIcon.png" id="searchIcon">
       </li>
+      <li><a href="/aboutus">關於我們</a></li>
     </ol>
   <img src="./image/blackCross.png" alt="" id="hamCross">
   </div><!--place between <body> and <header>-->

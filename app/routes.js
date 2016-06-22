@@ -16,6 +16,25 @@ module.exports = function(app, passport, ioop) {
     });
   });
 
+  app.get('/mypage',isLoggedIn, function(req, res){
+    Topic.find({ startedBy: req.user._id }, function(err, data){
+      res.render('mypage.ejs', {
+        isAuthenticated: req.user ? req.isAuthenticated():false,
+        isAdmin: req.user ? req.user.isAdmin:false,
+        user: req.user,
+        issue: data
+      });
+    });
+  });
+
+  app.get('/aboutus', function(req, res){
+    res.render('aboutus.ejs', {
+      isAuthenticated: req.user ? req.isAuthenticated():false,
+      isAdmin: req.user ? req.user.isAdmin:false,
+      user: req.user
+    });
+  });
+
   app.get('/issueList', function(req, res){
     Topic.find({}).sort('-commentsCount').limit(5).exec(function(err, hot){
       if(err) throw err;
@@ -40,6 +59,7 @@ module.exports = function(app, passport, ioop) {
     Topic.find({}, function(err, data){
       if(err) throw err;
       if(data){
+        console.log(data.startedBy);
         res.render('allIssue.ejs', {
           user: req.user,
           issue: data,
@@ -150,7 +170,6 @@ module.exports = function(app, passport, ioop) {
         newTopic.comments = undefined;
         newTopic.commentsCount = 0;
         newTopic.startedBy = req.user._id;
-        console.log(newTopic);
         newTopic.save(function(err) {
           if (err) throw err;
           console.log(newTopic.name + " created!");

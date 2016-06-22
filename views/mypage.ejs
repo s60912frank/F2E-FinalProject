@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/mypage.css">
   <link rel="stylesheet" href="./css/common.css" />
 </head>
 <body>
@@ -49,40 +49,29 @@
       <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
     </div>
   </header>
-
-  <div class="container">
-    <h1 id="title">建立議題</h1>
-    <div id="createTitle">
-      <h3>標題</h3>
+    <div id="changeName"><h3>暱稱修改:</h3></div>
+    <div id="input">
       <input type="text">
-    </div>
-    <div id="category">
-      <h3>分類</h3>
-      <form>
-        <select name="issueCategory">
-  　      <option value="political">政治議題</option>
-  　      <option value="social">社會議題</option>
-  　      <option value="sport">運動競賽</option>
-  　      <option value="gossip">勁爆八卦</option>　
-          <option value="hate">靠北發洩</option>　
-        </select>
-      </form>
-    </div>
-    <div id="discribeContent">
-      <h3>議題描述</h3>
-      <textarea cols="50" rows="4"></textarea>
-    </div>
-    <div id="opinion">
-      <h3>你的看法</h3>
-      <textarea cols="50" rows="4"></textarea>
-    </div>
-    <div id="submitContainer">
-      <button id="submit">建立議題</button>
-    </div>
+      <button id="submit">修改</button>
   </div>
+  <div class="container">
+    <h3 id="issue">已發佈的議題</h3>
+  </div>
+
+  <% if(issue){
+    issue.forEach(function(i){
+      var link = "/issue?title=" + i.name %>
+      <a href=<%= link %>>
+        <div class="issues"><%= i.name %></div>
+      </a>
+    <% });
+  } %>
+  <footer>
+
+  </footer>
 
   <script src="./js/jquery-3.0.0.min.js"></script><!--Link to script for hamburger menu after </footer>-->
   <script src="./js/hamburgerMenu.js"></script><!--Link to script for hamburger menu after </footer>-->
-  <script src="./js/post.js"></script>
+  <script src="./js/mypage.js"></script>
 </body>
 </html>
