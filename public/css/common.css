@@ -34,9 +34,27 @@ body{
     width: 500px;
     height: 100%;
     background-color: violet;
-    background-image: url(../image/surprise.png);
+    background-image: url(../image/HambugerBackground.jpg);
     position: fixed;
     z-index:10;
+}
+
+#HamburgerMenu ul li{
+  list-style: none;
+  width: 400px;
+  line-height: 3em;
+  font-family: "微軟正黑體", "文泉驛正黑", "儷黑 Pro", "標楷體";
+  font-size: 55px;
+  text-align:center;
+}
+
+#HamburgerMenu ul li a{
+  text-decoration:none;
+  color: #FFF;
+}
+
+#HamburgerMenu ul li a:hover{　　
+  color: red;
 }
 
 footer{
