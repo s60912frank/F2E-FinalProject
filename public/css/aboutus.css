@@ -41,7 +41,7 @@
 
 .image_set_left{
   border-radius: 50%;
-  width: 21%;
+  width: 200px;
   margin: 0;
   float: left;
   display: inline-block;
@@ -106,6 +106,7 @@ footer p{
   }
   .content{
     max-width: 1280px;
+    text-align: center;
   }
 }
 
@@ -115,6 +116,7 @@ footer p{
   }
   .content{
   width: 100%;
+  text-align: center;
   }
 
   .us_left{
@@ -167,12 +169,13 @@ footer p{
 
   .content{
     width: 100%;
+    text-align: center;
   }
 
   .image_set_left{
     border-radius: 50%;
     margin-left: 29%;
-    width: 32%;
+    width: 200px;
     float: left;
     display: inline-block;
     height: 200px;
@@ -181,7 +184,7 @@ footer p{
   .image_set_right{
     border-radius: 50%;
     margin-left: 29%;
-    width: 32%;
+    width: 200px;
     float: left;
     display: inline-block;
     height: 200px;
