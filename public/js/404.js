@@ -15,7 +15,7 @@ var main = function () {
                 zap.play();
                 setTimeout(plugIn, 500);
                 setTimeout(function () {
-                    window.location = './404.html';
+                    history.back();
                 }, 2000);
                 return false;
             }
