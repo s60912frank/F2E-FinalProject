@@ -148,6 +148,7 @@ footer p{
   .image_set_left{
     border-radius: 50%;
     margin-right: 5%;
+        width: 200px;
     float: left;
     display: inline-block;
     height: 200px;
@@ -156,6 +157,7 @@ footer p{
   .image_set_right{
     border-radius: 50%;
     margin-right: 5%;
+        width: 200px;
     float: left;
     display: inline-block;
     height: 200px;
