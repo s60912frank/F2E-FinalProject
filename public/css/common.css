@@ -107,8 +107,16 @@ body{
   color: red;
 }
 
-footer{
-    background-color: #D5E2B9;
+footer {
+  background-color: #D5E2B9;
+  float: left;
+  margin-top: 2em;
+}
+
+#foooooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 
@@ -158,5 +166,9 @@ footer{
   #hamNick {
     font-size: 2em;
     color: white;
+  }
+
+  #foooooter {
+    flex-wrap: wrap;
   }
 }

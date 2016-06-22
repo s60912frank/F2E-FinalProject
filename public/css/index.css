@@ -117,8 +117,13 @@ body {
 }
 
 footer {
-  height: 75px;
-  background-color: #AAAAAA;
+  background-color: #D5E2B9;
+}
+
+#foooooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (min-width: 1280px) {
@@ -194,5 +199,9 @@ footer {
     margin-left: 0px;
     text-align: center;
     display: inline-block;
+  }
+
+  #foooooter {
+    flex-wrap: wrap;
   }
 }

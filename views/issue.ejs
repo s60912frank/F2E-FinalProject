@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>issue page</title>
+    <title><%= issue.name %></title>
     <link rel="stylesheet" href="./css/common.css" /><!--CSS for <header> <footer> "hamburger menu" ONLY-->
     <link rel="stylesheet" href="./css/issue.css" />
 </head>
@@ -136,8 +136,12 @@
         <% } %>
       </div>
     </div>
-    <footer><!--Same <footer> in every page-->
-        <h1>Copyrights in footer, maybe?</h1>
+    <footer class="fillParentWidth">
+      <div class="container" id="foooooter">
+        <p>Designed by TanKevin Design Studio</p>
+        <p>Not responsible for any comments in this website</p>
+        <p>NTUTEECS 2016</p>
+      </div>
     </footer>
     <script src="./js/jquery-3.0.0.min.js"></script><!--Link to script for hamburger menu after </footer>-->
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

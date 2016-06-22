@@ -123,10 +123,10 @@ module.exports = function(app, passport, ioop) {
       if(err) throw err;
       if(topic){
         idToNickname(topic, 0, function(){
-          console.log(topic);
           User.findOne({ _id: topic.startedBy }, function(err, user){
             if(err) throw err;
             if(user){
+              console.log("幹");
               topic.startedBy = user.nickname;
               res.render('issue.ejs', {
                 user: req.user,
