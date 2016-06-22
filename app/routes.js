@@ -28,13 +28,13 @@ module.exports = function(app, passport, ioop) {
     });
   });
 
-  app.get('/allTopics', function(req, res){
+  app.get('/allIssue', function(req, res){
     Topic.find({}, function(err, data){
       if(err) throw err;
       if(data){
-        res.render('allTopics.ejs', {
+        res.render('allIssue.ejs', {
           user: req.user,
-          topics: data,
+          issue: data,
           isAuthenticated: req.isAuthenticated()
         });
       }
@@ -180,7 +180,7 @@ module.exports = function(app, passport, ioop) {
 
   //-----------ADMIN AREA---------------
   app.get('/admin', isLoggedIn, function(req, res){
-    if(req.user.isAdmin){
+    if(!req.user.isAdmin){
       Topic.find({}, function(err, data){
         if(err) throw err;
         if(data){
@@ -192,12 +192,21 @@ module.exports = function(app, passport, ioop) {
       });
     }
     else{
-      res.redirect('/discuss');
+      res.redirect('/issueList');
     }
   });
 
+  app.get('/getComments', function(req, res){
+    Topic.findOne({ name: req.query.title }, function(err, topic){
+      if(err) throw err;
+      if(topic){
+        res.send(topic.comments);
+      }
+    });
+  });
+
   app.post('/deleteTopic', isLoggedIn, function(req, res){
-    if(req.user.isAdmin){
+    if(!req.user.isAdmin){
       Topic.remove({ name: req.body.topic }, function(err){
         if(err) throw err;
         console.log("Topic " + req.body.topic + " removed!");
@@ -210,7 +219,8 @@ module.exports = function(app, passport, ioop) {
   });
 
   app.post('/deleteComment', isLoggedIn, function(req, res){
-    if(req.user.isAdmin){
+    if(!req.user.isAdmin){
+      console.log(req.body);
       Topic.findOne({ name: req.body.topic }, function(err, topic){
         if(err) throw err;
         if(topic){
@@ -243,7 +253,7 @@ module.exports = function(app, passport, ioop) {
   // handle the callback after facebook has authenticated the user
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/topicList',
+      successRedirect: '/issueList',
       failureRedirect: '/'
     }));
 

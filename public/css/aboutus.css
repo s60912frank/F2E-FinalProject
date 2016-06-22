@@ -118,8 +118,7 @@ footer p{
   }
 
   .us_left{
-    width:76.5625%;
-    height: 200px;
+    width:100%;
     margin-left: 3.75%;
     display: inline-block;
     float: left;
@@ -127,8 +126,7 @@ footer p{
   }
 
   .us_right{
-    width:76.5625%;
-    height: 200px;
+    width:100%;
     margin-left: 3.75%;
     display: inline-block;
     float: left;
@@ -141,6 +139,24 @@ footer p{
 
   .our_info_right{
     margin-left: 0;
+    margin-right:0;
+    float: left;
+  }
+
+  .image_set_left{
+    border-radius: 50%;
+    margin-right: 5%;
+    float: left;
+    display: inline-block;
+    height: 200px;
+  }
+
+  .image_set_right{
+    border-radius: 50%;
+    margin-right: 5%;
+    float: left;
+    display: inline-block;
+    height: 200px;
   }
 }
 

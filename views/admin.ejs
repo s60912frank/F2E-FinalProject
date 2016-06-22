@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/common.css">
+  <Link rel="stylesheet" type ="text/css" href="./css/admin.css">
   <title>Admin</title>
 </head>
 <body>
-  <h1>哈囉!管理員<%= user.name %></h1>
-  <a href="/topicList"><button>回到討論</button></a>
+  <div id="HamburgerMenu"><!---->
+  </div>
+  <div id="shadeCover">
+  </div>
+  <header><!---->
+    <div class="container">
+      <a href="/"><img id="Logo" src="./image/logo.png" /></a>
+      <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
+    </div>
+  </header>
 
-  <% if (topics) { %>
-    <% for(var i = topics.length - 1; i >= 0; i--) {%>
-     <div>
-       <h2 class="topicTitle"><%= topics[i].name %></h2>
-       <button class="deleteTopic">刪除主題</button>
-       <ul>
-         <% for(var j = topics[i].comments.length - 1; j >= 0; j--) {%>
-           <% var date = topics[i].comments[j].time %>
-           <li class="comment">
-             <span class="commentById"><%= topics[i].comments[j].uid %></span>:
-             <span class="commentContent"><%= topics[i].comments[j].comment %></span>@
-             <%= (date.getMonth() + 1) + '/' + date.getDate() +
-             ' ' + date.getHours() + ":" + date.getMinutes() %>
-             <button class="deleteComment">刪除留言</button>
-           </li>
-         <% } %>
-       </ul>
-     </div>
-    <% } %>
-  <% } %>
+  <div class="container">
+    <h1>哈囉!管理員<%= user.name %></h1>
+    <div id="topicData">
+      <% if (topics) { %>
+        <% for(var i = topics.length - 1; i >= 0; i--) {%>
+         <div class="topic">
+           <h2 class="topicTitle"><%= topics[i].name %></h2>
+           <div class="buttons">
+             <button class="deleteTopic">刪除主題</button>
+             <button class="expand">展開</button>
+           </div>
+           <div class="comments"></div>
+         </div>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
 
   <script src="./js/jquery-3.0.0.min.js"></script>
+  <script src="./js/hamburgerMenu.js"></script>
   <script src="./js/admin.js"></script>
 </body>
 </html>

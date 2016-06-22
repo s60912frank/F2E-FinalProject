@@ -1,0 +1,63 @@
+h2 {
+  display: inline-block;
+}
+
+p {
+  display: inline-block;
+}
+
+button {
+  border-color: transparent;
+  background-color: white;
+}
+
+h1 {
+  margin-left: 2.5%;
+}
+
+#topicData {
+  width: 95%;
+  margin-left: 2.5%;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.topic {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #BBDEFB;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  box-sizing: border-box;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.topicTilte {
+  max-width: 70%;
+}
+
+.buttons {
+}
+
+.comments {
+  width: 100%;
+}
+
+.comments div {
+  margin: 0.5em;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E3F2FD;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
