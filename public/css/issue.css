@@ -1,3 +1,8 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+* {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
 #TopicSection{
     width: 98%;
     margin-left: 1%;
@@ -16,8 +21,25 @@
   word-break: break-all;
 }
 
-#issueTitle h1{
-    background-color: #2196F3;
+#titleContainer {
+  background-color: #2196F3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 21px;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#titleContainer * {
+  display: inline-block;
+  margin: 0;
+}
+
+#titleContainer h1:nth-child(2) {
+  color: white;
+  font-weight: bolder;
 }
 
 #issueDescription {
@@ -27,6 +49,7 @@
 
 #issueDescription h1{
     background-color: #2196F3;
+    padding-left: 0.5em;
 }
 
 #posterOpinion {
@@ -36,6 +59,7 @@
 
 #posterOpinion h1 {
   background-color: #2196F3;
+  padding-left: 0.5em;
 }
 
 #descImg {
@@ -54,6 +78,7 @@
 
 #posterInfo h1 {
     background-color: #2196F3;
+    padding-left: 0.5em;
 }
 
 
