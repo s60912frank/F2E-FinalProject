@@ -1,0 +1,50 @@
+#changeName{
+  margin-top: 2%;
+  margin-left: 20%;
+  float: left;
+}
+
+#input{
+  float: left;
+  margin-top: 3.6%;
+  margin-left: 1%;
+  width: 40%;
+}
+
+input{
+  width: 40%;
+}
+
+#issue{
+  clear: both;
+  margin-top: 12%;
+  margin-left: 16.8%;
+}
+
+#issue1{
+  background-color: yellow;
+  margin: 5% 5% 5% 21%;
+  width: 60%;
+  height: 50px;
+}
+
+#issue2{
+  background-color: yellow;
+  margin: 5% 5% 5% 21%;
+  width: 60%;
+  height: 50px;
+}
+
+#issue3{
+  background-color: yellow;
+  margin: 5% 5% 5% 21%;
+  width: 60%;
+  height: 50px;
+}
+
+#issue4{
+  background-color: yellow;
+  margin: 5% 5% 5% 21%;
+  width: 60%;
+  height: 50px;
+}
