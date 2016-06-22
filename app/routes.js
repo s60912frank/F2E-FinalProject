@@ -91,7 +91,9 @@ module.exports = function(app, passport, ioop) {
       if(err) throw err;
       var searchResult = {
         text: req.query.text,
-        result: data
+        result: data,
+        isAuthenticated: req.isAuthenticated(),
+        user: req.user
       };
       res.render('search.ejs', { search: searchResult });
     });
@@ -136,7 +138,7 @@ module.exports = function(app, passport, ioop) {
         });
       }
       else{
-        res.redirect('/404');
+        res.redirect('/404.html');
       }
     });
   });
@@ -185,6 +187,7 @@ module.exports = function(app, passport, ioop) {
 
   //回應
   app.post('/comment', isLoggedIn, function(req, res){
+    console.log("HHHHHHHHHHHH   " + req.body.topic);
     Topic.findOne({ name: req.body.topic }, function(err, topic){
       if(err) throw err;
       if(topic){
@@ -213,7 +216,8 @@ module.exports = function(app, passport, ioop) {
         if(data){
           res.render('admin.ejs', {
             user: req.user,
-            topics: data
+            topics: data,
+            isAuthenticated: req.user.isAdmin
           });
         }
       });
@@ -288,10 +292,6 @@ module.exports = function(app, passport, ioop) {
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
-  });
-
-  app.get('/404', function(req, res) {
-    res.render('404.ejs');
   });
 
   app.get('*', function(req, res) {

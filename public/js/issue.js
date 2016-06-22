@@ -78,7 +78,7 @@ var sendComment = function(text){
     comment: text
   });
   $.post('/comment', {
-    topic: $('#issueTitle div').text(),
+    topic: $('#title').text(),
     comment: text
   });
 }

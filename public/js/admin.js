@@ -21,15 +21,18 @@ $(document).ready(function(){
   });
 
   $('.expand').click(function(){
+    console.log("WHEEEEEE");
     var jthis = $(this);
     if(jthis.text() == '展開'){
       $.get('/getComments?title=' + jthis.parent().siblings('h2').text(), function(data){
         if(data.length > 0){
+          console.log(data);
           data.forEach(function(comment){
             var com = $('<div class="comment">');
             com.append($('<p class="commentText">').text(comment.comment));
             com.append($('<button class="deleteComment">').text("刪除留言"));
             com.append($('<p class="uid" style="display:none;">').text(comment.uid));
+            com.prependTo(jthis.parent().siblings('.comments'));
           });
         }
         else{
