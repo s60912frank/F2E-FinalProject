@@ -9,7 +9,39 @@
 </head>
 <body>
     <% var formatTime = function(text) { return text < 10 ? '0' + text : text } %>
-    <div id="HamburgerMenu"></div><!--place between <body> and <header>-->
+    <div id="HamburgerMenu">
+      <a href="/"><img id="hamLogo" src="./image/logo.png" /></a>
+      <ul>
+        <li>
+          <% if(isAuthenticated){ %>
+            <a href=""><%= user.name %></a>
+          <% } else { %>
+            <a href="/auth/facebook">Facebook登入</a>
+          <% } %>
+        </li>
+        <li id="hamNick">
+          <% if(isAuthenticated){ %>
+            <p>目前暱稱:<%= user.nickname %></p>
+          <% } %>
+        </li>
+        <li><a href="/issueList">議題列表</a></li>
+        <li>
+          <% if(isAuthenticated){ %>
+            <a href="/post">發表議題</a>
+          <% } %>
+        </li>
+        <li>
+          <% if(isAuthenticated){ %>
+            <a href="/logout">登出</a>
+          <% } %>
+        </li>
+        <li id="hamSearch">
+          <input type="text" id="searchInput">
+          <img src="./image/searchIcon.png" id="searchIcon">
+        </li>
+      </ol>
+    <img src="./image/blackCross.png" alt="" id="hamCross">
+    </div><!--place between <body> and <header>-->
     <div id="shadeCover"></div><!--place between <body> and <header>-->
     <header><!--Same <header> in every page-->
       <div class="container">

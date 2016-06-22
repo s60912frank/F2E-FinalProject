@@ -13,6 +13,39 @@ body{
     background-color: #FEF4EC;
 }
 
+#hamLogo {
+  width: 90%;
+  float: left;
+  margin-left: 5%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#hamSearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  box-sizing: border-box;
+}
+
+#searchInput {
+  border-radius: 1em;
+  border-color: transparent;
+  width: 80%;
+  height: 50px;
+  display: inline-block;
+  font-size: 0.5em;
+  background-color: #CCCCCC;
+}
+
+#searchIcon {
+  height: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+
 #Logo{
     max-height: 75px;
     max-width: 60%;
@@ -36,21 +69,33 @@ body{
 
 #HamburgerMenu{
     right: -500px;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 100%;
     background-color: violet;
     background-image: url(../image/HambugerBackground.jpg);
     position: fixed;
     z-index:10;
+    text-align: center;
 }
 
 #HamburgerMenu ul li{
   list-style: none;
-  width: 400px;
-  line-height: 3em;
-  font-family: "微軟正黑體", "文泉驛正黑", "儷黑 Pro", "標楷體";
-  font-size: 55px;
+  width: 100%;
+  font-size: 3em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
   text-align:center;
+}
+
+#HamburgerMenu ul li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+#hamNick {
+  font-size: 2em;
+  color: white;
 }
 
 #HamburgerMenu ul li a{
@@ -85,6 +130,10 @@ footer{
   width: 100%;
 }
 
+#hamCross {
+  height: 75px;
+}
+
 @media screen and (min-width: 1280px) {
   .container {
     max-width: 1280px;
@@ -100,5 +149,14 @@ footer{
 @media screen and (max-width: 767px) {
   .container {
     width: 100%;
+  }
+
+  #HamburgerMenu ul li {
+    font-size: 2em;
+  }
+
+  #hamNick {
+    font-size: 2em;
+    color: white;
   }
 }

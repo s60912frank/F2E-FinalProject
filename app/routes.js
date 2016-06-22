@@ -8,6 +8,14 @@ module.exports = function(app, passport, ioop) {
     });
   });
 
+  app.get('/post',isLoggedIn, function(req, res){
+    res.render('post.ejs', {
+      isAuthenticated: req.user ? req.isAuthenticated():false,
+      isAdmin: req.user ? req.user.isAdmin:false,
+      user: req.user
+    });
+  });
+
   app.get('/issueList', function(req, res){
     Topic.find({}).sort('-commentsCount').limit(5).exec(function(err, hot){
       if(err) throw err;
@@ -180,7 +188,7 @@ module.exports = function(app, passport, ioop) {
 
   //-----------ADMIN AREA---------------
   app.get('/admin', isLoggedIn, function(req, res){
-    if(!req.user.isAdmin){
+    if(req.user.isAdmin){
       Topic.find({}, function(err, data){
         if(err) throw err;
         if(data){
@@ -206,7 +214,7 @@ module.exports = function(app, passport, ioop) {
   });
 
   app.post('/deleteTopic', isLoggedIn, function(req, res){
-    if(!req.user.isAdmin){
+    if(req.user.isAdmin){
       Topic.remove({ name: req.body.topic }, function(err){
         if(err) throw err;
         console.log("Topic " + req.body.topic + " removed!");
@@ -219,7 +227,7 @@ module.exports = function(app, passport, ioop) {
   });
 
   app.post('/deleteComment', isLoggedIn, function(req, res){
-    if(!req.user.isAdmin){
+    if(req.user.isAdmin){
       console.log(req.body);
       Topic.findOne({ name: req.body.topic }, function(err, topic){
         if(err) throw err;
@@ -268,7 +276,7 @@ module.exports = function(app, passport, ioop) {
   });
 
   app.get('*', function(req, res) {
-    res.redirect('/404');
+    res.redirect('/404.html');
   });
 };
 
