@@ -1,0 +1,91 @@
+#allIssue {
+  float: left;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  clear: both;
+}
+
+p{
+  color: black;
+  text-align: center;
+}
+
+.issueSectionTitle {
+  display: inline-block;
+  width: 80%;
+  margin-left: 10%;
+  float: left;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #E3F2FD;
+}
+
+.issueEntry {
+  background-color: #8EB4E3;
+  width: 100%;
+  margin-top: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
+}
+
+.issueEntry a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.issueEntry a p {
+  max-width: 75%;
+}
+
+.info img {
+  height: 50px;
+}
+
+.latest_issue{
+  margin-left: 2.8125%;
+  margin-top: 50px;
+  width: 44.6875%;
+  display: inline-block;
+}
+
+.all_issue{
+  margin-top: 20px;
+  width: 45%;
+  display: inline-block;
+}
+
+#blank {
+  height: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .issueEntry a p {
+    max-width: 100%;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .issueEntry a {
+    flex-wrap: wrap;
+  }
+
+  .issueSectionTitle {
+    width: 100%;
+    margin-left: 0;
+  }
+}

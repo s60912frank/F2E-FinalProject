@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/common.css">
+    <Link rel="stylesheet" type ="text/css" href="./css/allIssue.css">
+    <title></title>
+  </head>
+
+  <body>
+    <% var formatTime = function(text) { return text < 10 ? '0' + text : text } %>
+    <div id="HamburgerMenu"><!---->
+    </div>
+    <div id="shadeCover">
+    </div>
+    <header><!---->
+      <div class="container">
+        <a href="/"><img id="Logo" src="./image/logo.png" /></a>
+        <img id="HamburgerIcon" src="./image/hamburgerIcon.png" />
+      </div>
+    </header>
+    <div class="container">
+      <div id="allIssue">
+        <div class="issueSectionTitle"><p>全部議題</p></div>
+        <% if(issue){
+          issue.forEach(function(entry){
+            var link = '/issue?title=' + entry.name
+            var date = entry.time;
+            var timeString = formatTime(date.getMonth() + 1) + '/' + formatTime(date.getDate()) + ' ' + formatTime(date.getHours()) + ":" + formatTime(date.getMinutes()); %>
+            <div class="issueEntry">
+              <a href=<%= link %>>
+                <p><%= entry.name %></p>
+              <div class='info'>
+                <img src="./image/clock.png" alt="">
+                <p><%= timeString %></p>
+                <img src="./image/messageIcon.png" alt="">
+                <p><%= entry.commentsCount %></p>
+              </div>
+              </a>
+            </div>
+        <%});
+        } %>
+      </div>
+      <div class = "all_issue"></div>
+    </div>
+    <footer>
+      <p>Copyrights in footer, maybe?</p>
+    </footer>
+  </body>
+  <script src="./js/jquery-3.0.0.min.js"></script>
+  <script src="./js/hamburgerMenu.js"></script>
+</html>
