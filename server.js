@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var mongoose = require('mongoose');
 var passport = require('passport');
 
@@ -12,6 +12,7 @@ var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var passportSocketIo = require("passport.socketio");
 var io = require("socket.io")(app.server);
+var path = require('path');
 
 var configDB = require('./config/database.js'); //db位置
 
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true })); //讀取請求的body資料
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
